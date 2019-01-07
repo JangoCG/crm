@@ -1,10 +1,78 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: cengiz
+ * Date: 23.11.18
+ * Time: 00:09
+ */
+
+include("config.php");
+
+//Variablen deklarieren und mit leeren Werten initalisieren
+
+$vorname ="";
+$vornameError ="";
+$nachname ="";
+$nachnameError ="";
+
+
+
+//Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    //Vorname
+    if (empty(trim($_POST["vorname"]))) {
+        $vornameError = "Bitte geben Sie einen Vornamen ein";
+
+    } elseif (!(ctype_alpha($_POST["vorname"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
+        $vornameError = "Bitte verwenden Sie nur Buchstaben für den Vornamen";
+    } elseif (strlen(trim($_POST["vorname"])) < 2) {
+        $vornameError = "Der Vorname muss 2 Buchstaben oder mehr enthalten";
+    } elseif (strlen(trim($_POST["vorname"])) > 25) {
+        $vornameError = "Der Vorname muss 25 Buchstaben oder weniger enthalten";
+    } else {
+        $vorname = trim($_POST["vorname"]);
+    }
+    //Nachname
+    if (empty(trim($_POST["nachname"]))) {
+        $nachnameError = "Bitte geben Sie einen nachnamen ein";
+
+    } elseif (!(ctype_alpha($_POST["nachname"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
+        $nachnameError = "Bitte verwenden Sie nur Buchstaben für den nachnamen";
+    } elseif (strlen(trim($_POST["nachname"])) < 2) {
+        $nachnameError = "Der nachname muss 2 Buchstaben oder mehr enthalten";
+    } elseif (strlen(trim($_POST["nachname"])) > 25) {
+        $nachnameError = "Der nachname muss 25 Buchstaben oder weniger enthalten";
+    } else {
+        $nachname = trim($_POST["nachname"]);
+    }
+
+
+    //Vordem Insert überprüfen ob Fehler vorhanden sind
+    if(empty($vornameError) && empty($nachnameError)) {
+
+        //SQL Statement Variable übergeben
+        $sqlStatement = "INSERT INTO test (Vorname) 
+                     VALUES ('$vorname')";
+
+        //SQL Insert durchführen mit mysqli query
+        if(mysqli_query($connection, $sqlStatement)) {
+            echo "Account erfolgreich angelegt";
+        } else {
+            echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>andisos</title>
+    <title>Account anlegen</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
@@ -43,18 +111,35 @@
 
             <div class="row">
                 <div class="col">
+                    <form action="accounts-anlegen.php" method="post">
                     <h1>Account anlegen</h1>
-                    <div><label style="width:109.6px;">Vorname</label><input type="text" class="ml-2" style="background-color:#ffffff;"></div>
-                    <div><label style="width:109.6px;">Nachname</label><input type="text" class="ml-2" style="background-color:#ffffff;"></div>
-                    <div><label style="width:109.6px;">Geburtsdatum</label><input type="text" class="ml-2"></div>
-                    <div><label style="width:109.6px;">Firma</label><input type="text" class="ml-2"></div>
+                    <div>
+                        <label style="width:109.6px;">Vorname</label>
+                        <input type="text" name="vorname" value="<?php echo $vorname; ?>" class="ml-2" style="background-color:#ffffff;">
+                        <span class="help-block"><?php echo $vornameError; ?></span>
+                    </div>
+                    <div>
+                        <label style="width:109.6px;">Nachname</label>
+                        <input type="text" name="nachname" value="<?php echo $Nachname; ?>" class="ml-2" style="background-color:#ffffff;">
+                        <span class="help-block"><?php echo $nachnameError; ?></span>
+                    </div>
+                    <div>
+                        <label style="width:109.6px;">Geburtsdatum</label>
+                        <input type="text" name="geburtsdatum" value="<?php echo $geburstdatum; ?>"class="ml-2">
+                        <span class="help-block"><?php echo $geburstdatumError; ?></span>
+                    </div>
+                    <div>
+                        <label style="width:109.6px;">Firma</label>
+                        <input type="text" name="firma" value="<?php echo $firma; ?>" class="ml-2"></div>
+                        <span class="help-block"><?php echo $firmaError; ?></span>
                 </div>
                 <div class="col">
                     <h1>&nbsp;</h1>
                     <div><label style="width:109.6px;">Straße</label><input type="text" class="ml-2"></div>
                     <div><label style="width:109.6px;">PLZ</label><input type="text" class="ml-2"></div>
                     <div><label style="width:109.6px;">Ort</label><input type="text" class="ml-2"></div>
-                    <div><label style="width:109.6px;">Land</label><input type="text" class="ml-2"><button class="btn btn-primary such-button" type="button">Account anlegen</button></div>
+                    <div><label style="width:109.6px;">Land</label><input type="text" class="ml-2"><button class="btn btn-primary such-button" type="submit">Account anlegen</button></div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -62,6 +147,11 @@
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/Sidebar-Menu.js"></script>
+
+
+
 </body>
 
+
 </html>
+
