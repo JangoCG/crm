@@ -78,20 +78,20 @@ if(empty(trim($_POST["passwordConfirm"]))) {
 if(empty($usernameError) && empty($passwordError) && empty($passwordConfirmError)) {
 
 
-    //Passwort verschlüsseln mit dem PASSWORD_DEFAULT algorithmus welches bcrypt ist und für
-    //Blowfish Algorithmus steht
-    $hash = password_hash($password, PASSWORD_DEFAULT);
-    //SQL Statement Variable übergeben
-    $sqlStatement = "INSERT INTO users (username, password) 
-                     VALUES ('$username', '$hash')";
+ //Passwort verschlüsseln mit dem PASSWORD_DEFAULT algorithmus welches bcrypt ist und für
+//Blowfish Algorithmus steht
+$hash = password_hash($password, PASSWORD_DEFAULT);
+//SQL Statement Variable übergeben
+$sqlStatement = "INSERT INTO users (username, password)
+VALUES ('$username', '$hash')";
 
-    //SQL Insert durchführen mit mysqli query
+//SQL Insert durchführen mit mysqli query
 
-    if(mysqli_query($connection, $sqlStatement)) {
-        echo "Registrierung erfolgreich";
-    } else {
-        echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
-    }
+if(mysqli_query($connection, $sqlStatement)) {
+echo "Registrierung erfolgreich";
+} else {
+echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
+}
 }
 
 ?>
