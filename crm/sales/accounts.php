@@ -1,3 +1,39 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: cengiz
+ * Date: 23.11.18
+ * Time: 00:09
+ */
+
+include("config.php");
+
+//Variablen deklarieren und mit leeren Werten initalisieren
+
+$nachname="";
+
+$nachname = trim($_POST["nachname"]);
+
+
+
+
+
+//Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $selectStatement = "SELECT Nachname FROM test WHERE Nachname ='$nachname'";
+    $result = mysqli_query($connection, $selectStatement);
+    var_dump($result);
+
+
+
+
+
+
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -42,10 +78,15 @@
             </div>
             <div class="row">
                 <div class="col">
+                    <form action="accounts.php" method="post">
                     <h1>Accounts suchen</h1>
-                    <div><label style="width:80.6px;">Nachname</label><input type="text" placeholder="Name eingeben" class="ml-2" style="background-color:#ffffff;"></div>
+                    <div>
+                        <label style="width:80.6px;">Nachname</label>
+                        <input type="text" placeholder="Name eingeben" name="nachname" class="ml-2" style="background-color:#ffffff;">
+                    </div>
                     <div><label style="width:80.6px;">Ort</label><input type="text" placeholder="Ort eingeben" class="ml-2"></div>
-                    <div><label style="width:80.6px;">ID</label><input type="text" placeholder="ID eingeben" class="ml-2"><button class="btn btn-primary such-button" type="button">Suchen</button></div>
+                    <div><label style="width:80.6px;">ID</label><input type="text" placeholder="ID eingeben" class="ml-2"><button class="btn btn-primary such-button" type="submit">Suchen</button></div>
+                    </form>
                     <div>
                         <div class="table-responsive">
                             <table class="table">
