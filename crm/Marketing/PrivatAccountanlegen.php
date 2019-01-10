@@ -14,20 +14,18 @@ $vorname = "";
 $vornameError = "";
 $nachname = "";
 $nachnameError = "";
-$firma = "";
-$firmaError = "";
-$strasse = "";
-$strasseError = "";
-$land = "";
-$landError = "";
-$plz = "";
-$plzError = "";
-$strasse = "";
-$strasseError = "";
+$firma= "";
+$firmaError= "";
+$plz= "";
+$plzError= "";
+$land= "";
+$strasse= "";
+$strasseError= "";
+$stadt= "";
+$stadtError= "";
 $geburtsdatum = "";
 $geburtsdatumError = "";
-$stadt = "";
-$stadtError = "";
+
 
 
 //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
@@ -46,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $vorname = trim($_POST["vorname"]);
     }
-    // Abfrage für Nachname
+    //Abfrage für Nachname
     if (empty(trim($_POST["nachname"]))) {
         $nachnameError = "Bitte geben Sie einen nachnamen ein";
 
@@ -59,82 +57,91 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $nachname = trim($_POST["nachname"]);
     }
-    // Abfrage für Firma
+
+    //Abfrage für Firma
     if (empty(trim($_POST["firma"]))) {
-        $firmaError = "Bitte geben Sie einen Firmennamen ein";
+        $firmaError = "Bitte geben Sie einen firman ein";
 
     } elseif (!(ctype_alpha($_POST["firma"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
-        $firmaError = "Bitte verwenden Sie nur Buchstaben für die Firma";
+        $firmaError = "Bitte verwenden Sie nur Buchstaben für den firman";
     } elseif (strlen(trim($_POST["firma"])) < 2) {
-        $firmaError = "Die Firma muss 2 Buchstaben oder mehr enthalten";
+        $firmaError = "Der firma muss 2 Buchstaben oder mehr enthalten";
     } elseif (strlen(trim($_POST["firma"])) > 25) {
-        $firmaError = "Die Firma muss 25 Buchstaben oder weniger enthalten";
+        $firmaError = "Der firma muss 25 Buchstaben oder weniger enthalten";
     } else {
         $firma = trim($_POST["firma"]);
     }
 
-
-    // Abfrage für PLZ
+    //Abfrage für PLZ
     if (empty(trim($_POST["plz"]))) {
-        $plzError = "Bitte geben Sie eine Postleitzahl ein";
+        $plzError = "Bitte geben Sie einen plzn ein";
+
+    } elseif (!(ctype_digit ($_POST["plz"]))) { //ctype_alpha prüft ob nur aus zahlen besteht
+        $plzError = "Bitte verwenden Sie nur Buchstaben für den plzn";
     } elseif (strlen(trim($_POST["plz"])) < 5) {
-        $plzError = "Die Postleitzahl muss 5 Zahlen enthalten";
+        $plzError = "Der plz muss 2 Buchstaben oder mehr enthalten";
     } elseif (strlen(trim($_POST["plz"])) > 5) {
-        $plzError = "Die Postleitzahl muss 5 Zahlen enthalten";
+        $plzError = "Der plz muss 25 Buchstaben oder weniger enthalten";
     } else {
         $plz = trim($_POST["plz"]);
     }
 
-    // Abfrage für Land
+
+    //Abfrage für Land
+
     if (empty(trim($_POST["land"]))) {
+        $landError = "Bitte geben Sie einen landn ein";
+
     } elseif (!(ctype_alpha($_POST["land"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
-        $landError = "Bitte geben Sie ein Land ein";
-    } elseif (strlen(trim($_POST["land"])) < 4) {
-        $landError = "Das Land muss 4 Buchstaben oder mehr enthalten";
+        $landError = "Bitte verwenden Sie nur Buchstaben für den landn";
+    } elseif (strlen(trim($_POST["land"])) < 2) {
+        $landError = "Der land muss 2 Buchstaben oder mehr enthalten";
     } elseif (strlen(trim($_POST["land"])) > 25) {
-        $landError = "Das Land muss 25 Buchstaben oder weniger enthalten";
+        $landError = "Der land muss 25 Buchstaben oder weniger enthalten";
     } else {
         $land = trim($_POST["land"]);
     }
 
-    // Abfrage für Straße
+    //Abfrage für Straße
+
     if (empty(trim($_POST["strasse"]))) {
-        $strasseError = "Bitte geben Sie ein Straße ein";
-    } elseif (strlen(trim($_POST["strasse"])) < 4) {
-        $strasseError = "Die Straße muss 4 Buchstaben oder mehr enthalten";
+        $strasseError = "Bitte geben Sie einen strassen ein";
+
+    } elseif (!(ctype_alpha($_POST["strasse"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
+        $strasseError = "Bitte verwenden Sie nur Buchstaben für den strassen";
+    } elseif (strlen(trim($_POST["strasse"])) < 2) {
+        $strasseError = "Der strasse muss 2 Buchstaben oder mehr enthalten";
     } elseif (strlen(trim($_POST["strasse"])) > 25) {
-        $strasseError = "Die Straße muss 25 Buchstaben oder weniger enthalten";
+        $strasseError = "Der strasse muss 25 Buchstaben oder weniger enthalten";
     } else {
         $strasse = trim($_POST["strasse"]);
     }
 
-    // Abfrage für Geburtsdatum
-    if (empty(trim($_POST["geburtsdatum"]))) {
-        $geburtsdatumError = "Bitte geben Sie das Geburtsdatum ein mit der Syntax: YYYY-MM-DD ";
-    } elseif (strlen(trim($_POST["geburtsdatum"])) == date()) {
-        $geburtsdatumError = "Syntax für das Geburtsdatum: YYYY-MM-DD";
-    } else {
-        $geburtsdatum = trim($_POST["geburtsdatum"]);
-    }
+    //Abfrage für Stadt
 
-    // Abfrage für Stadt
     if (empty(trim($_POST["stadt"]))) {
+        $stadtError = "Bitte geben Sie einen stadtn ein";
+
     } elseif (!(ctype_alpha($_POST["stadt"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
-        $stadtError = "Bitte geben Sie die Stadt ein";
-    } elseif (strlen(trim($_POST["stadt"])) < 4) {
-        $stadtError = "Die Stadt muss 4 Buchstaben oder mehr enthalten";
+        $stadtError = "Bitte verwenden Sie nur Buchstaben für den stadtn";
+    } elseif (strlen(trim($_POST["stadt"])) < 2) {
+        $stadtError = "Der stadt muss 2 Buchstaben oder mehr enthalten";
     } elseif (strlen(trim($_POST["stadt"])) > 25) {
-        $stadtError = "Die Stadt muss 25 Buchstaben oder weniger enthalten";
+        $stadtError = "Der stadt muss 25 Buchstaben oder weniger enthalten";
     } else {
         $stadt = trim($_POST["stadt"]);
     }
 
+
+
+
+
     //Vordem Insert überprüfen ob Fehler vorhanden sind
-    if(empty($vornameError) && empty($nachnameError) && empty($firmaError) && empty($plzError) && empty($landError) && empty($strasseError) && empty($geburtsdatumError) && empty($stadtError)){
+    if(empty($vornameError) && empty($nachnameError) && empty($firmaError) && empty($plzError) && empty($landError) && empty($strasseError) && empty($stadtError)) {
 
         //SQL Statement Variable übergeben
-        $sqlStatement = "INSERT INTO test (Vorname, Nachname, Firma, PLZ, Land, Strasse, Geburtsdatum, Stadt) 
-                     VALUES ('$vorname', '$nachname', '$firma', '$plz', '$land', '$strasse', '$geburtsdatum', '$stadt')";
+        $sqlStatement = "INSERT INTO test (Vorname, Nachname,Firma, PLZ, Land, Strasse, Stadt) 
+                     VALUES ('$vorname', '$nachname', '$firma', '$plz', '$land', '$strasse', '$stadt')";
 
         //SQL Insert durchführen mit mysqli query
         if(mysqli_query($connection, $sqlStatement)) {
@@ -153,7 +160,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privat-Account anlegen</title>
+    <title>Account anlegen</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
@@ -162,10 +169,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 
+
 <body>
 <div id="wrapper">
     <div id="sidebar-wrapper" style="background-color:#37434d;">
-        <h1>MarketingPro</h1>
+        <h1><a href="index.php">Marketingpro</a></h1>
         <div class="mt-5">
             <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts & Produkte</a>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.html">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.html">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
@@ -174,19 +182,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="#">Leads suchen</a><a class="dropdown-item" role="presentation" href="#">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="#">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan anlegen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan suchen</a></div>
             </div>
         </div>
-        <div></div>
     </div>
+
+
+
+
     <div class="container-fluid">
         <div class="row">
             <div class="col text-right" style="background-color:#37434d;"><input type="search" placeholder="Suchbegriff eingeben" id="grossesFeld"><button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button></div>
         </div>
 
-
         <div class="row">
             <div class="col">
                 <form action="PrivatAccountanlegen.php" method="post">
-                    <h2>Privat-Account anlegen</h2><br>
-                    <b>Allgemeine Daten</b><br><br>
+                    <h1>Privat-Account anlegen</h1><br>
+                    <h4>Allgemeine Daten</h4><br>
                     <div>
                         <label style="width:109.6px;">Vorname</label>
                         <input type="text" name="vorname" value="<?php echo $vorname; ?>" class="ml-2" style="background-color:#ffffff;">
@@ -198,38 +208,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         <span class="help-block"><?php echo $nachnameError; ?></span>
                     </div>
                     <div>
-                        <label style="width:109.6px;">Geburtsdatum</label>
-                        <input type="text" name="geburtsdatum" value="YYYY-MM-DD" class="ml-2" style="background-color:#ffffff;">
-                        <span class="help-block"><?php echo $geburtsdatumError; ?></span>
-                    </div>
-                    <div>
                         <label style="width:109.6px;">Firma</label>
-                        <input type="text" name="firma" value="<?php echo $firma; ?>" class="ml-2" style="background-color:#ffffff;">
-                        <span class="help-block"><?php echo $firmaError; ?></span>
-                    </div>
+                        <input type="text" name="firma" value="<?php echo $firma; ?>" class="ml-2"></div>
+                    <span class="help-block"><?php echo $firmaError; ?></span>
+                    <button class="btn btn-primary such-button" type="submit">Account anlegen</button>
             </div>
-            <div class="col"><br><br><br>
-                <b>Hauptadresse und Kommunikationsdaten</b><br><br>
+            <div class="col">
+                <br><br><br><h4>Adressdaten</h4><br>
+                <div>
+                    <label style="width:109.6px;">Straße</label>
+                    <input type="text" name="strasse" value="<?php echo $strasse; ?>" class="ml-2">
+                    <span class="help-block"><?php echo $strasseError; ?></span>
+                </div>
                 <div>
                     <label style="width:109.6px;">PLZ</label>
-                    <input type="text" name="plz" value="<?php echo $plz; ?>" class="ml-2" style="background-color:#ffffff;">
+                    <input type="text" name="plz" value="<?php echo $plz; ?>" class="ml-2">
                     <span class="help-block"><?php echo $plzError; ?></span>
                 </div>
                 <div>
-                    <label style="width:109.6px;">Land</label>
-                    <input type="text" name="land" value="<?php echo $land; ?>" class="ml-2" style="background-color:#ffffff;">
-                    <span class="help-block"><?php echo $landError; ?></span>
-                </div>
-                <div>
                     <label style="width:109.6px;">Stadt</label>
-                    <input type="text" name="stadt" value="<?php echo $stadt; ?>" class="ml-2" style="background-color:#ffffff;">
+                    <input type="text" name="stadt" value="<?php echo $stadt;?>" class="ml-2">
                     <span class="help-block"><?php echo $stadtError; ?></span>
                 </div>
                 <div>
-                    <label style="width:109.6px;">Straße</label>
-                    <input type="text" name="strasse" value="<?php echo $strasse; ?>" class="ml-2" style="background-color:#ffffff;">
-                    <span class="help-block"><?php echo $strasseError; ?></span>
-                </div><button class="btn btn-primary such-button" type="submit">Account anlegen</button></div>
+                    <label style="width:109.6px;">Land</label>
+                    <input type="text" name="land" value="<?php echo $land; ?>" class="ml-2">
+                    <span class="help-block"><?php echo $landError; ?></span>
+
+                </div>
                 </form>
             </div>
         </div>
@@ -238,11 +244,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/js/Sidebar-Menu.js"></script>
-
-
-
 </body>
-
-
 </html>
 
