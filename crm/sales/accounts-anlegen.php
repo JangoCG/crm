@@ -209,7 +209,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         <span class="help-block"><?php echo $nachnameError; ?></span>
                     </div>
                     <div>
-                        <label style="width:109.6px;">Geburtsdatum</label>
+                        <label style="width:109.6px;">Rolle</label>
                         <input type="date" name="geburtsdatum" value="<?php echo $geburstdatum; ?>" class="ml-2">
                         <span class="help-block"><?php echo $geburstdatumError; ?></span>
                     </div>
