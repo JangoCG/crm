@@ -23,6 +23,8 @@ $strasse="";
 $strasseError="";
 $stadt="";
 $stadtError="";
+$rolle="";
+$rolleError="";
 
 
 
@@ -130,15 +132,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $stadt = trim($_POST["stadt"]);
     }
 
+    //Rolle
 
+    foreach ($_POST['rolle'] as $rolle) {
+        echo $rolle;
+    }
 
 
     //Vordem Insert überprüfen ob Fehler vorhanden sind
     if(empty($vornameError) && empty($nachnameError) && empty($firmaError) && empty($plzError) && empty($landError) && empty($strasseError) && empty($stadtError)) {
 
         //SQL Statement Variable übergeben
-        $sqlStatement = "INSERT INTO test (Vorname, Nachname,Firma, PLZ, Land, Strasse) 
-                     VALUES ('$vorname','$nachname','$firma', '$plz', '$land', '$strasse')";
+        $sqlStatement = "INSERT INTO test (Vorname, Nachname,Firma, PLZ, Land, Strasse, Rolle, Stadt) 
+                     VALUES ('$vorname','$nachname','$firma', '$plz', '$land', '$strasse', '$rolle', '$stadt')";
 
         //SQL Insert durchführen mit mysqli query
         if(mysqli_query($connection, $sqlStatement)) {
@@ -146,6 +152,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
         }
+
     }
 }
 
@@ -163,6 +170,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../css/cengiz.css">
 </head>
 
 <body>
@@ -210,8 +218,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div>
                         <label style="width:109.6px;">Rolle</label>
-                        <input type="date" name="geburtsdatum" value="<?php echo $geburstdatum; ?>" class="ml-2">
-                        <span class="help-block"><?php echo $geburstdatumError; ?></span>
+                        <select id="rolle" name="rolle[]"   class="ml-2" >
+                            <option>Lieferant</option>
+                            <option>Kunde</option>
+                            <option>Spediteur</option>
+                        </select>
+                       <span class="help-block"><?php echo $rolleError; ?></span>
                     </div>
                     <div>
                         <label style="width:109.6px;">Firma</label>
@@ -224,6 +236,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label style="width:109.6px;">Straße</label>
                         <input type="text" name="strasse" value="<?php echo $strasse; ?>" class="ml-2">
                         <span class="help-block"><?php echo $strasseError; ?></span>
+                        <label style="width:20px;">Nr.</label>
+                        <input type="text" name="hausnummer" value="<?php echo $strasse; ?>" class="ml-2 kleines-feld">
                     </div>
                     <div>
                         <label style="width:109.6px;">PLZ</label>
@@ -232,8 +246,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div>
                         <label style="width:109.6px;">Stadt</label>
-                        <input type="text" name="stadt" value="<?php echo $ort;?>" class="ml-2">
-                        <span class="help-block"><?php echo $ortError; ?></span>
+                        <input type="text" name="stadt" value="<?php echo $stadt;?>" class="ml-2">
+                        <span class="help-block"><?php echo $stadtError; ?></span>
                     </div>
                     <div>
                         <label style="width:109.6px;">Land</label>
@@ -249,6 +263,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/Sidebar-Menu.js"></script>
+
+
 
 
 
