@@ -43,20 +43,73 @@ $endterminError = "";
         $beschreibung = trim($_POST["beschreibung"]);
     }
 
-    //Abfrage für Art
-    if (empty(trim($_POST["art"]))) {
-        $artError = "Bitte geben Sie eine Beschreibung ein";
-    } elseif (strlen(trim($_POST["art"])) < 2) {
-        $artError = "Die Beschreibung muss 2 Zeichen oder mehr enthalten";
-    } elseif (strlen(trim($_POST["art"])) > 66) {
-        $artError = "Die Beschreibung muss 66 Zeichen oder weniger enthalten";
+    //Abfrage für Zielsetzung
+    if (empty(trim($_POST["zielsetzung"]))) {
+        $zielsetzungError = "Bitte geben Sie eine Zielsetzung ein";
+    } elseif (strlen(trim($_POST["zielsetzung"])) < 2) {
+        $zielsetzungError = "Die Zielsetzung muss 2 Zeichen oder mehr enthalten";
+    } elseif (strlen(trim($_POST["zielsetzung"])) > 66) {
+        $zielsetzungError = "Die Zielsetzung muss 66 Zeichen oder weniger enthalten";
     } else {
-        $art = trim($_POST["art"]);
+        $zielsetzung = trim($_POST["zielsetzung"]);
     }
 
-    //Vordem Insert überprüfen ob Fehler vorhanden sind
+    //Abfrage für Zielsetzung
+    if (empty(trim($_POST["taktik"]))) {
+        $taktikError = "Bitte geben Sie eine Taktik ein";
+    } elseif (strlen(trim($_POST["taktik"])) < 2) {
+        $taktikError = "Die Taktik muss 2 Zeichen oder mehr enthalten";
+    } elseif (strlen(trim($_POST["taktik"])) > 66) {
+        $taktikError = "Die Taktik muss 66 Zeichen oder weniger enthalten";
+    } else {
+        $taktik = trim($_POST["taktik"]);
+    }
 
-    if (empty($beschreibungError) && empty($artError) && empty($zielsetzungError) && empty($taktikError) && empty($prioritaetError) && empty($mitarbeiter) && empty($starttermin) && empty($endtermin)) {
+
+
+    //Abfrage für Art --> Hier wird geprüft was angeklickt wurde, durch eine Schleife!
+        foreach ($_POST['art'] as $art) {
+        }
+
+    //Abfrage für Priorität --> Hier wird geprüft was angeklickt wurde, durch eine Schleife!
+        foreach ($_POST['prioritaet'] as $prioritaet) {
+    }
+
+    //Abfrage für Mitarbeiter
+        if (empty(trim($_POST["mitarbeiter"]))) {
+            $mitarbeiterError = "Bitte geben Sie eine Taktik ein";
+        } elseif (strlen(trim($_POST["mitarbeiter"])) < 2) {
+            $mitarbeiterError = "Die Taktik muss 2 Zeichen oder mehr enthalten";
+        } elseif (strlen(trim($_POST["mitarbeiter"])) > 66) {
+            $mitarbeiterError = "Die Taktik muss 66 Zeichen oder weniger enthalten";
+        } else {
+            $mitarbeiter = trim($_POST["mitarbeiter"]);
+        }
+
+    //Abfrage für Starttermin
+        if (empty(trim($_POST["starttermin"]))) {
+            $startterminError = "Bitte geben Sie ein Starttermin ein";
+        } elseif (strlen(trim($_POST["starttermin"])) < 2) {
+            $startterminError = "Der Starttermin muss 2 Zeichen oder mehr enthalten";
+        } elseif (strlen(trim($_POST["starttermin"])) > 66) {
+            $startterminError = "Der Starttermin muss 66 Zeichen oder weniger enthalten";
+        } else {
+            $starttermin = trim($_POST["starttermin"]);
+        }
+
+    //Abfrage für Endtermin
+        if (empty(trim($_POST["endtermin"]))) {
+            $endterminError = "Bitte geben Sie ein Starttermin ein";
+        } elseif (strlen(trim($_POST["endtermin"])) < 2) {
+            $endterminError = "Der Endtermin muss 2 Zeichen oder mehr enthalten";
+        } elseif (strlen(trim($_POST["endtermin"])) > 66) {
+            $endterminError = "Der Endtermin muss 66 Zeichen oder weniger enthalten";
+        } else {
+            $endtermin = trim($_POST["endtermin"]);
+        }
+
+        //Vordem Insert überprüfen ob Fehler vorhanden sind
+    if (empty($beschreibungError) && empty($artError) && empty($zielsetzungError) && empty($taktikError) && empty($prioritaetError) && empty($startterminError) && empty($endterminError) && empty($mitarbeiterError)) {
 
 
         //SQL Statement Variable übergeben
@@ -91,13 +144,13 @@ $endterminError = "";
 <body>
 <div id="wrapper">
     <div id="sidebar-wrapper" style="background-color:#37434d;">
-        <h1>MarketingPro</h1>
+        <h1><a href="index.php">Marketingpro</a></h1>
         <div class="mt-5">
             <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts & Produkte</a>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.html">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.html">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
             </div>
             <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:248px;">Marketing</button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="#">Leads suchen</a><a class="dropdown-item" role="presentation" href="#">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="#">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan anlegen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan suchen</a></div>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="#">Leads suchen</a><a class="dropdown-item" role="presentation" href="KampagneAnlegen.php">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="#">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan anlegen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan suchen</a></div>
             </div>
         </div>
         <div></div>
@@ -118,7 +171,15 @@ $endterminError = "";
                     </div>
                     <div>
                         <label style="width:109.6px;">Art</label>
-                        <input type="text" name="art" value="<?php echo $art; ?>" class="ml-2" style="background-color:#ffffff;">
+                        <select id="art" name="art[]"   class="ml-2" >
+                            <option>Kundenanwerbung</option>
+                            <option>Kampagne mit Partnern</option>
+                            <option>Kundenentwicklung</option>
+                            <option>WEB Kampagne</option>
+                            <option>Kundenerhaltung</option>
+                            <option>E-Mail-Marketing</option>
+                            <option>Marktdurchdingung</option>
+                        </select>
                         <span class="help-block"><?php echo $artError; ?></span>
                     </div>
                     <div>
@@ -132,38 +193,42 @@ $endterminError = "";
                         <span class="help-block"><?php echo $taktikError; ?></span>
                     </div>
                     <div>
-                        <label style="width:109.6px;">Priorität</label>
-                        <input type="text" name="prioritaet" value="<?php echo $prioritaet; ?>" class="ml-2" style="background-color:#ffffff;">
-                        <span class="help-block"><?php echo $prioritaetError; ?></span>
-                    </div>
-                    <div>
                         <label style="width:109.6px;">Zuständiger Mitarbeiter</label>
                         <input type="text" name="mitarbeiter" value="<?php echo $mitarbeiter; ?>" class="ml-2" style="background-color:#ffffff;">
                         <span class="help-block"><?php echo $mitarbeiterError; ?></span>
-                        <div>&emsp;&emsp;&emsp;<button class="btn btn-primary such-button" type="submit">Kampagne anlegen</button></div>
                     </div>
+                    <div>
+                        <label style="width:109.6px;">Priorität</label>
+                        <select id="prioritaet" name="prioritaet[]"   class="ml-2" >
+                            <option>niedrig</option>
+                            <option>mittel</option>
+                            <option>hoch</option>
+                            <option>sehr hoch</option>
+                        </select>
+                        <span class="help-block"><?php echo $prioritaetError; ?></span>
+                    </div>
+                    <div>
+                        <label style="width:109.6px;">Starttermin</label>
+                        <input type="text" name="starttermin" value="<?php echo $starttermin; ?>" class="ml-2" style="background-color:#ffffff;">
+                        <span class="help-block"><?php echo $startterminError; ?></span>
+                    </div>
+                    <div>
+                        <label style="width:109.6px;">Endtermin</label>
+                        <input type="text" name="endtermin" value="<?php echo $endtermin; ?>" class="ml-2" style="background-color:#ffffff;">
+                        <span class="help-block"><?php echo $endterminError; ?></span>
+                    </div>
+                        <div>&emsp;&emsp;&emsp;<button class="btn btn-primary such-button" type="submit">Kampagne anlegen</button></div>
                 </form>
-            </div>
-            <div class="col"><br><br><br>
-                <b>Termine</b><br><br>
-                <div>
-                    <label style="width:109.6px;">Starttermin</label>
-                    <input type="text" name="starttermin" value="<?php echo $starttermin; ?>" class="ml-2" style="background-color:#ffffff;">
-                    <span class="help-block"><?php echo $startterminError; ?></span>
-                </div>
-                <div>
-                    <label style="width:109.6px;">Endtermin</label>
-                    <input type="text" name="endtermin" value="<?php echo $endtermin; ?>" class="ml-2" style="background-color:#ffffff;">
-                    <span class="help-block"><?php echo $endterminError; ?></span>
-                </div>
             </div>
         </div>
     </div>
-        <div class="col"><form enctype="multipart/form-data" action="upload.php" method="POST">
+        <div class="col">
+            <form enctype="multipart/form-data" action="upload.php" method="POST">
                 <br><br><p><h4>Kampagnedatei hochladen:</h4><br>
-                <input type="file" name="uploaded_file">
-                <input type="submit" value="Upload">
-            </form></div>
+                <input type="file" name="hochgeladeneDatei">
+                <input type="submit" value="Hochladen">
+            </form>
+        </div>
     </div>
 </div>
 
