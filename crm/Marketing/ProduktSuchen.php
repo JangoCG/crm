@@ -28,25 +28,22 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col text-right" style="background-color:#37434d;"><input type="search"
-                                                                                 placeholder="Suchbegriff eingeben"
-                                                                                 id="grossesFeld">
+            <div class="col text-right" style="background-color:#37434d;"><input type="search" placeholder="Suchbegriff eingeben"id="grossesFeld">
                 <button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <form action="PrivatAccountsuchen.php" method="post">
-                    <h1>Accounts suchen</h1>
+                <form action="ProduktSuchen.php" method="post">
+                    <h1>Produkte suchen</h1>
                     <div>
-                        <label style="width:80.6px;">Nachname</label>
-                        <input type="text" placeholder="Name eingeben" name="nachname" class="ml-2"
-                               style="background-color:#ffffff;">
+                        <label style="width:80.6px;">Produkt-ID</label>
+                        <input type="text" placeholder="ID eingeben" name="nachname" class="ml-2"style="background-color:#ffffff;">
                     </div>
-                    <div><label style="width:80.6px;">Stadt</label><input type="text" name="stadt" placeholder="Stadt eingeben"
-                                                                          class="ml-2"></div>
-                    <div><label style="width:80.6px;">ID</label><input type="text" name="id" placeholder="ID eingeben"
-                                                                       class="ml-2">
+                    <div><label style="width:80.6px;">Name</label><input type="text" name="stadt" placeholder="Produktname eingeben"class="ml-2"></div>
+                    <div><label style="width:80.6px;">Kategorie</label><input type="text" name="stadt" placeholder="Kategorie eingeben"class="ml-2"></div>
+                    <div><label style="width:80.6px;">Menge</label><input type="text" name="stadt" placeholder="Stadt eingeben"class="ml-2"></div>
+                    <div><label style="width:80.6px;">Preis</label><input type="text" name="id" placeholder="Preis eingeben"class="ml-2">
                         <button class="btn btn-primary such-button" type="submit">Suchen</button>
                     </div>
                 </form>
@@ -84,50 +81,50 @@
 
 
                     echo '<div>';
-                    echo ' <div class="table-responsive">';
-                    echo '   <table class="table">';
+                echo ' <div class="table-responsive">';
+                echo '   <table class="table">';
                     echo ' <thead>';
                     echo '<tr>';
-                    echo '<th>ID</th>';
-                    echo ' <th>Vorname</th>';
-                    echo '<th>Nachname</th>';
-                    echo '<th>Firma</th>';
-                    echo '<th>PLZ</th>';
-                    echo '<th>Land</th>';
-                    echo '<th>Strasse</th>';
-                    echo '<th>Stadt</th>';
-                    echo '</tr>';
+                        echo '<th>ID</th>';
+                        echo ' <th>Vorname</th>';
+                        echo '<th>Nachname</th>';
+                        echo '<th>Firma</th>';
+                        echo '<th>PLZ</th>';
+                        echo '<th>Land</th>';
+                        echo '<th>Strasse</th>';
+                        echo '<th>Stadt</th>';
+                        echo '</tr>';
                     echo '</thead>';
                     echo ' <tbody>';
                     if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<tr>';
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<tr>';
 
-                            // echo "</table>";
-                            echo " <td>". $row["ID"]."</td>";
-                            echo " <td>". $row["Vorname"]."</td>";
-                            echo " <td>". $row["Nachname"]."</td>";
-                            echo " <td>". $row["Firma"]."</td>";
-                            echo " <td>". $row["PLZ"]."</td>";
-                            echo " <td>". $row["Land"]."</td>";
-                            echo " <td>". $row["Strasse"]."</td>";
-                            echo " <td>". $row["Stadt"]."</td>";
-                            echo '</tr>';
+                        // echo "</table>";
+                echo " <td>". $row["ID"]."</td>";
+                echo " <td>". $row["Vorname"]."</td>";
+                echo " <td>". $row["Nachname"]."</td>";
+                echo " <td>". $row["Firma"]."</td>";
+                echo " <td>". $row["PLZ"]."</td>";
+                echo " <td>". $row["Land"]."</td>";
+                echo " <td>". $row["Strasse"]."</td>";
+                echo " <td>". $row["Stadt"]."</td>";
+                echo '</tr>';
 
 
 
-                        }
-
-                        echo ' </tbody>';
-                        echo '</table>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
                 }
-                ?>
-            </div>
+
+                echo ' </tbody>';
+                echo '</table>';
+                echo '</div>';
+                echo '</div>';
+            }
+            }
+            ?>
         </div>
     </div>
+</div>
 </div>
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
@@ -135,3 +132,6 @@
 </body>
 
 </html>
+
+<!DOCTYPE html>
+<html>

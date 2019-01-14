@@ -28,8 +28,8 @@ $endterminError = "";
 
 
 
-    //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
+//Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     //Abfrage für Beschreibung
@@ -68,47 +68,47 @@ $endterminError = "";
 
 
     //Abfrage für Art --> Hier wird geprüft was angeklickt wurde, durch eine Schleife!
-        foreach ($_POST['art'] as $art) {
-        }
+    foreach ($_POST['art'] as $art) {
+    }
 
     //Abfrage für Priorität --> Hier wird geprüft was angeklickt wurde, durch eine Schleife!
-        foreach ($_POST['prioritaet'] as $prioritaet) {
+    foreach ($_POST['prioritaet'] as $prioritaet) {
     }
 
     //Abfrage für Mitarbeiter
-        if (empty(trim($_POST["mitarbeiter"]))) {
-            $mitarbeiterError = "Bitte geben Sie eine Taktik ein";
-        } elseif (strlen(trim($_POST["mitarbeiter"])) < 2) {
-            $mitarbeiterError = "Die Taktik muss 2 Zeichen oder mehr enthalten";
-        } elseif (strlen(trim($_POST["mitarbeiter"])) > 66) {
-            $mitarbeiterError = "Die Taktik muss 66 Zeichen oder weniger enthalten";
-        } else {
-            $mitarbeiter = trim($_POST["mitarbeiter"]);
-        }
+    if (empty(trim($_POST["mitarbeiter"]))) {
+        $mitarbeiterError = "Bitte geben Sie eine Taktik ein";
+    } elseif (strlen(trim($_POST["mitarbeiter"])) < 2) {
+        $mitarbeiterError = "Die Taktik muss 2 Zeichen oder mehr enthalten";
+    } elseif (strlen(trim($_POST["mitarbeiter"])) > 66) {
+        $mitarbeiterError = "Die Taktik muss 66 Zeichen oder weniger enthalten";
+    } else {
+        $mitarbeiter = trim($_POST["mitarbeiter"]);
+    }
 
     //Abfrage für Starttermin
-        if (empty(trim($_POST["starttermin"]))) {
-            $startterminError = "Bitte geben Sie ein Starttermin ein";
-        } elseif (strlen(trim($_POST["starttermin"])) < 2) {
-            $startterminError = "Der Starttermin muss 2 Zeichen oder mehr enthalten";
-        } elseif (strlen(trim($_POST["starttermin"])) > 66) {
-            $startterminError = "Der Starttermin muss 66 Zeichen oder weniger enthalten";
-        } else {
-            $starttermin = trim($_POST["starttermin"]);
-        }
+    if (empty(trim($_POST["starttermin"]))) {
+        $startterminError = "Bitte geben Sie ein Starttermin ein";
+    } elseif (strlen(trim($_POST["starttermin"])) < 2) {
+        $startterminError = "Der Starttermin muss 2 Zeichen oder mehr enthalten";
+    } elseif (strlen(trim($_POST["starttermin"])) > 66) {
+        $startterminError = "Der Starttermin muss 66 Zeichen oder weniger enthalten";
+    } else {
+        $starttermin = trim($_POST["starttermin"]);
+    }
 
     //Abfrage für Endtermin
-        if (empty(trim($_POST["endtermin"]))) {
-            $endterminError = "Bitte geben Sie ein Starttermin ein";
-        } elseif (strlen(trim($_POST["endtermin"])) < 2) {
-            $endterminError = "Der Endtermin muss 2 Zeichen oder mehr enthalten";
-        } elseif (strlen(trim($_POST["endtermin"])) > 66) {
-            $endterminError = "Der Endtermin muss 66 Zeichen oder weniger enthalten";
-        } else {
-            $endtermin = trim($_POST["endtermin"]);
-        }
+    if (empty(trim($_POST["endtermin"]))) {
+        $endterminError = "Bitte geben Sie ein Starttermin ein";
+    } elseif (strlen(trim($_POST["endtermin"])) < 2) {
+        $endterminError = "Der Endtermin muss 2 Zeichen oder mehr enthalten";
+    } elseif (strlen(trim($_POST["endtermin"])) > 66) {
+        $endterminError = "Der Endtermin muss 66 Zeichen oder weniger enthalten";
+    } else {
+        $endtermin = trim($_POST["endtermin"]);
+    }
 
-        //Vordem Insert überprüfen ob Fehler vorhanden sind
+    //Vordem Insert überprüfen ob Fehler vorhanden sind
     if (empty($beschreibungError) && empty($artError) && empty($zielsetzungError) && empty($taktikError) && empty($prioritaetError) && empty($startterminError) && empty($endterminError) && empty($mitarbeiterError)) {
 
 
@@ -147,12 +147,11 @@ $endterminError = "";
         <h1><a href="index.php">Marketingpro</a></h1>
         <div class="mt-5">
             <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts & Produkte</a>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.html">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.html">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.php">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.php">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
             </div>
             <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:248px;">Marketing</button>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="#">Leads suchen</a><a class="dropdown-item" role="presentation" href="KampagneAnlegen.php">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="#">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan anlegen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan suchen</a><a class="dropdown-item" role="presentation" href="Dateisuche.php">Datei suchen</a></div>
             </div>
-        </div>
         </div>
         <div></div>
     </div>
@@ -218,25 +217,25 @@ $endterminError = "";
                         <input type="text" name="endtermin" value="<?php echo $endtermin; ?>" class="ml-2" style="background-color:#ffffff;">
                         <span class="help-block"><?php echo $endterminError; ?></span>
                     </div>
-                        <div>&emsp;&emsp;&emsp;<button class="btn btn-primary such-button" type="submit">Kampagne anlegen</button></div>
+                    <div>&emsp;&emsp;&emsp;<button class="btn btn-primary such-button" type="submit">Kampagne anlegen</button></div>
                 </form>
             </div>
         </div>
     </div>
-        <div class="col">
-            <form enctype="multipart/form-data" action="upload.php" method="POST">
-                <br><br><p><h4>Kampagnedatei hochladen:</h4><br>
-                <input type="file" name="hochgeladeneDatei">
-                <input type="submit" value="Hochladen">
-            </form>
-        </div>
+    <div class="col">
+        <form enctype="multipart/form-data" action="upload.php" method="POST">
+            <br><br><p><h4>Kampagnedatei hochladen:</h4><br>
+            <input type="file" name="hochgeladeneDatei">
+            <input type="submit" value="Hochladen">
+        </form>
     </div>
 </div>
+
 
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/js/Sidebar-Menu.js"></script>
 
-    </body>
+</body>
 </html>
 

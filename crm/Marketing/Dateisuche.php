@@ -11,8 +11,17 @@
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
 
+<style>hr {
+        width: 100%;
+        height: 2px;
+        margin:  auto;
+        color: blue;
+        background: #d3d9df;
+    }
+</style>
+
+</head>
 
 <body>
 <div id="wrapper">
@@ -20,7 +29,7 @@
         <h1><a href="Dateisuche.php">Marketingpro</a></h1>
         <div class="mt-5">
             <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts & Produkte</a>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.html">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.html">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.php">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.php">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
             </div>
             <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:248px;">Marketing</button>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="#">Leads suchen</a><a class="dropdown-item" role="presentation" href="KampagneAnlegen.php">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="#">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan anlegen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan suchen</a></div>
@@ -34,14 +43,14 @@
     </div>
     <div class="row">
         <div class="col">
-            <h1>Dateien auf dem Server:</h1>
+            <h2>Dateien auf dem Server:</h2>
             <div>
                 <div class="table-responsive">
                     <?php
                     $alledateien = scandir('/var/www/html/crm/Marketing/'); //Ordner "files" auslesen
 
                     foreach ($alledateien as $datei) { // Ausgabeschleife
-                        echo $datei."<a href=\"/crm/Marketing/Bilder\"><br>"; //Ausgabe Einzeldatei
+                        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;". $datei. "<a href=\"/crm/Marketing/Bilder\">". "<hr>"; //Ausgabe Einzeldatei
                     };
                     ?>
                     </div>
@@ -49,6 +58,8 @@
             </div>
         </div>
     </div>
+
+
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/js/Sidebar-Menu.js"></script>
