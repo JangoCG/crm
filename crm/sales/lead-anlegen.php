@@ -23,10 +23,13 @@ $strasse="";
 $strasseError="";
 $stadt="";
 $stadtError="";
-$rolle="";
-$rolleError="";
+$leadInteresse="";
+$leadInteresseError="";
 $hausNummer="";
 $hausNummerError="";
+
+
+
 
 
 
@@ -133,9 +136,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $stadt = trim($_POST["stadt"]);
     }
 
-    //Rolle
-    //Um den Wert von Rolle zu erhalten wird Array durchlaufen, welches vorher im input deklariert wurde
-    foreach ($_POST['rolle'] as $rolle) {
+    //leadInteresse
+    //Um den Wert von leadInteresse zu erhalten wird Array durchlaufen, welches vorher im HTML Code deklariert wurde als name
+    foreach ($_POST['leadInteresse'] as $leadInteresse) {
+
+    }
+
+    foreach ($_POST['produkt'] as $produkt) {   //Ich hole das Produkt per post und speichere es in die Variable produkt
 
     }
 
@@ -157,8 +164,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($vornameError) && empty($nachnameError) && empty($firmaError) && empty($plzError) && empty($landError) && empty($strasseError) && empty($stadtError)) {
 
         //SQL Statement Variable übergeben
-        $sqlStatement = "INSERT INTO test (Vorname, Nachname,Firma, PLZ, Land, Strasse, Rolle, Stadt, Hausnummer) 
-                     VALUES ('$vorname','$nachname','$firma', '$plz', '$land', '$strasse', '$rolle', '$stadt', '$hausNummer')";
+        $sqlStatement = "INSERT INTO test (Vorname, Nachname,Firma, PLZ, Land, Strasse, leadInteresse, Stadt, Hausnummer) 
+                     VALUES ('$vorname','$nachname','$firma', '$plz', '$land', '$strasse', '$leadInteresse', '$stadt', '$hausNummer')";
 
         //SQL Insert durchführen mit mysqli query
         if(mysqli_query($connection, $sqlStatement)) {
@@ -178,7 +185,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account anlegen</title>
+    <title>Lead anlegen</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
@@ -199,7 +206,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="accounts.php">Accounts</a><a class="dropdown-item" role="presentation" href="accounts-anlegen.php">Accounts anlegen</a><a class="dropdown-item" role="presentation" href="ansprechpartner.php">Ansprechpartner</a></div>
             </div>
             <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:248px;">Verkauf</button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="lead-anlegen.php">Leads</a><a class="dropdown-item" role="presentation" href="opportunitie.php">Opportunitys</a><a class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="lead-anlegen.php">Leads anlegen</a><a class="dropdown-item" role="presentation" href="opportunitie.php">Opportunitys</a><a class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
             </div>
             <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:100%;">Grundfunktionen</button>
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="preise.php">Preise</a><a class="dropdown-item" role="presentation" href="produkte.php">Produkte</a><a class="dropdown-item" role="presentation" href="faktura.php">Faktura</a></div>
@@ -211,15 +218,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Container und danach kommt die Obere Navigation-->
 
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col text-right" style="background-color:#37434d;"><input type="search" placeholder="Suchbegriff eingeben" id="grossesFeld"><button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button></div>
-            </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-right" style="background-color:#37434d;"><input type="search" placeholder="Suchbegriff eingeben" id="grossesFeld"><button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button></div>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <form action="accounts-anlegen.php" method="post">
-                    <h1>Account anlegen</h1>
+        <div class="row">
+            <div class="col">
+                <form action="lead-anlegen.php" method="post">
+                    <h1>Lead anlegen</h1>
                     <div>
                         <label style="width:109.6px;">Vorname</label>
                         <input type="text" name="vorname" value="<?php echo $vorname; ?>" class="ml-2" style="background-color:#ffffff;">
@@ -231,56 +238,65 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         <span class="help-block"><?php echo $nachnameError; ?></span>
                     </div>
                     <div>
-                        <label style="width:109.6px;">Rolle</label>
-                        <select id="rolle" name="rolle[]"   class="ml-2" >
-                            <option>Lieferant</option>
-                            <option>Kunde</option>
-                            <option>Spediteur</option>
+                        <label style="width:109.6px;">Produkt</label>
+                        <select id="produkt" name="produkt[]"   class="ml-2" >
+                            <option>Produkt 1</option>
+                            <option>Produkt 2</option>
+                            <option>Produkt 3</option>
                         </select>
-                       <span class="help-block"><?php echo $rolleError; ?></span>
+                        <span class="help-block"><?php echo $leadInteresseError; ?></span>
+                    </div>
+                    <div>
+                        <label style="width:109.6px;">Bewertung</label>
+                        <select id="leadInteresse" name="leadInteresse[]"   class="ml-2" >
+                            <option>Hohes Interesse</option>
+                            <option>Mittleres Interesse</option>
+                            <option>Geringes Interesse</option>
+                        </select>
+                        <span class="help-block"><?php echo $leadInteresseError; ?></span>
                     </div>
                     <div>
                         <label style="width:109.6px;">Firma</label>
                         <input type="text" name="firma" value="<?php echo $firma; ?>" class="ml-2"></div>
-                        <span class="help-block"><?php echo $firmaError; ?></span>
+                    <span class="help-block"><?php echo $firmaError; ?></span>
+            </div>
+            <div class="col">
+                <h1>&nbsp;</h1>
+                <div>
+                    <label style="width:109.6px;">Straße</label>
+                    <input type="text" name="strasse" value="<?php echo $strasse; ?>" class="ml-2">
+                    <span class="help-block"><?php echo $strasseError; ?></span>
                 </div>
-                <div class="col">
-                    <h1>&nbsp;</h1>
-                    <div>
-                        <label style="width:109.6px;">Straße</label>
-                        <input type="text" name="strasse" value="<?php echo $strasse; ?>" class="ml-2">
-                        <span class="help-block"><?php echo $strasseError; ?></span>
-                    </div>
-                        <div>
+                <div>
 
-                        <label style="width:109.6px;">Hausnummer</label>
-                        <input type="text" name="hausNummer" maxlength="3" value="<?php echo $hausNummer; ?>" class="ml-2 kleines-feld">
-                        <span class="help-block"><?php echo $hausNummerError; ?></span>
-                    </div>
-                    <div>
-                        <label style="width:109.6px;">PLZ</label>
-                        <input type="text" name="plz" maxlength="5" value="<?php echo $plz; ?>" class="ml-2">
-                        <span class="help-block"><?php echo $plzError; ?></span>
-                    </div>
-                    <div>
-                        <label style="width:109.6px;">Stadt</label>
-                        <input type="text" name="stadt" value="<?php echo $stadt;?>" class="ml-2">
-                        <span class="help-block"><?php echo $stadtError; ?></span>
-                    </div>
-                    <div>
-                        <label style="width:109.6px;">Land</label>
-                        <input type="text" name="land" value="<?php echo $land; ?>" class="ml-2">
-                        <span class="help-block"><?php echo $landError; ?></span>
-                        <button class="btn btn-primary such-button" type="submit">Account anlegen</button>
-                    </div>
-                    </form>
+                    <label style="width:109.6px;">Hausnummer</label>
+                    <input type="text" name="hausNummer" maxlength="3" value="<?php echo $hausNummer; ?>" class="ml-2 kleines-feld">
+                    <span class="help-block"><?php echo $hausNummerError; ?></span>
                 </div>
+                <div>
+                    <label style="width:109.6px;">PLZ</label>
+                    <input type="text" name="plz" maxlength="5" value="<?php echo $plz; ?>" class="ml-2">
+                    <span class="help-block"><?php echo $plzError; ?></span>
+                </div>
+                <div>
+                    <label style="width:109.6px;">Stadt</label>
+                    <input type="text" name="stadt" value="<?php echo $stadt;?>" class="ml-2">
+                    <span class="help-block"><?php echo $stadtError; ?></span>
+                </div>
+                <div>
+                    <label style="width:109.6px;">Land</label>
+                    <input type="text" name="land" value="<?php echo $land; ?>" class="ml-2">
+                    <span class="help-block"><?php echo $landError; ?></span>
+                    <button class="btn btn-primary such-button" type="submit">Account anlegen</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/js/Sidebar-Menu.js"></script>
+</div>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/js/Sidebar-Menu.js"></script>
 
 
 

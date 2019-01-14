@@ -9,20 +9,20 @@
     <link rel="stylesheet" href="../assets/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 <div id="wrapper">
     <div id="sidebar-wrapper" style="background-color:#37434d;">
-        <h1><a href="index.php">Sales</a></h1>
+        <h1 class="test"> <a id="amkID" href="index.php" >Sales</a></h1>
         <div class="mt-5">
 
             <!-- Sidebar Buttons-->
 
             <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen"
                                                 data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts</a>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="accounts.php">Accounts</a><a
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="accounts.php">Accounts suchen</a><a
                             class="dropdown-item" role="presentation" href="accounts-anlegen.php">Accounts anlegen</a><a
                             class="dropdown-item" role="presentation" href="ansprechpartner.php">Ansprechpartner</a>
                 </div>
@@ -31,7 +31,7 @@
                 <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
                         type="button" style="width:248px;">Verkauf
                 </button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="leads.php">Leads</a><a
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="lead-anlegen.php">Leads</a><a
                             class="dropdown-item" role="presentation" href="opportunitie.php">Opportunitys</a><a
                             class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
             </div>
@@ -67,14 +67,14 @@
                         <input type="text" placeholder="Name eingeben" name="nachname" class="ml-2"
                                style="background-color:#ffffff;">
                     </div>
-                    <div><label style="width:80.6px;">Stadt</label><input type="text" name="stadt" placeholder="Stadt eingeben"
-                                                                        class="ml-2"></div>
+                    <div><label style="width:80.6px;">Stadt</label><input type="text" name="stadt"
+                                                                          placeholder="Stadt eingeben"
+                                                                          class="ml-2"></div>
                     <div><label style="width:80.6px;">ID</label><input type="text" name="id" placeholder="ID eingeben"
                                                                        class="ml-2">
                         <button class="btn btn-primary such-button" type="submit">Suchen</button>
                     </div>
                 </form>
-
 
 
                 <?php
@@ -91,17 +91,18 @@
 
                 $nachname = "";
                 $stadt = "";
-                $id ="";
+                $id = "";
 
                 $nachname = trim($_POST["nachname"]);
                 $stadt = trim($_POST["stadt"]);
                 $id = trim($_POST["id"]);
 
 
+
                 //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt FROM test
+                    $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, Hausnummer, Rolle FROM test
                                         WHERE (Nachname ='$nachname' AND Nachname != '')  OR (Stadt = '$stadt'AND Stadt != '')
                                          OR (ID = '$id' AND ID != '')";
                     $result = mysqli_query($connection, $selectStatement);
@@ -112,41 +113,39 @@
                     echo '   <table class="table">';
                     echo ' <thead>';
                     echo '<tr>';
-                         echo '<th>ID</th>';
-                         echo ' <th>Vorname</th>';
-                         echo '<th>Nachname</th>';
-                         echo '<th>Firma</th>';
+                    echo '<th>ID</th>';
+                    echo ' <th>Vorname</th>';
+                    echo '<th>Nachname</th>';
+                    echo '<th>Firma</th>';
                     echo '<th>PLZ</th>';
                     echo '<th>Land</th>';
                     echo '<th>Strasse</th>';
-                    echo '<th>Stadt</th>';
+                    echo '<th>Hausnummer</th>';
+                    echo '<th>Rolle</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo ' <tbody>';
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
+                            $row_id = $row['ID'];
                             echo '<tr>';
-
-                               // echo "</table>";
-                                echo " <td>". $row["ID"]."</td>";
-                                echo " <td>". $row["Vorname"]."</td>";
-                                 echo " <td>". $row["Nachname"]."</td>";
-                            echo " <td>". $row["Firma"]."</td>";
-                            echo " <td>". $row["PLZ"]."</td>";
-                            echo " <td>". $row["Land"]."</td>";
-                            echo " <td>". $row["Strasse"]."</td>";
-                            echo " <td>". $row["Stadt"]."</td>";
-                                echo '</tr>';
-
-
-
+                            echo " <td>"  . "<a href=\"test.php?id=" . $row_id . "\">" . $row_id . "</a></td>";
+                            echo " <td>"  . "<a href=\"test.php?id=" . $row_id . "\">" . $row["Vorname"] . "</a></td>";
+                            echo " <td>"  . "<a href=\"test.php?id=" . $row_id . "\">" . $row["Nachname"] . "</a></td>";
+                            echo " <td>" . $row["Firma"] . "</td>";
+                            echo " <td>" . $row["PLZ"] . "</td>";
+                            echo " <td>" . $row["Land"] . "</td>";
+                            echo " <td>" . $row["Strasse"] . "</td>";
+                            echo " <td>" . $row["Hausnummer"] . "</td>";
+                            echo " <td>" . $row["Rolle"] . "</td>";
+                            echo '</tr>';
                         }
 
-                    echo ' </tbody>';
-                    echo '</table>';
-                    echo '</div>';
-                    echo '</div>';
-                }
+                        echo ' </tbody>';
+                        echo '</table>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
                 }
                 ?>
             </div>
