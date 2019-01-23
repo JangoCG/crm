@@ -96,7 +96,7 @@
                     echo '<th>Land</th>';
                     echo '<th>Strasse</th>';
                     echo '<th>Stadt</th>';
-                    echo '</tr>';
+                    echo '</tr>';a
                     echo '</thead>';
                     echo ' <tbody>';
                     if (mysqli_num_rows($result) > 0) {
