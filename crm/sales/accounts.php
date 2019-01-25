@@ -129,9 +129,9 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             $row_id = $row['ID'];
                             echo '<tr>';
-                            echo " <td>"  . "<a href=\"test.php?id=" . $row_id . "\">" . $row_id . "</a></td>";
-                            echo " <td>"  . "<a href=\"test.php?id=" . $row_id . "\">" . $row["Vorname"] . "</a></td>";
-                            echo " <td>"  . "<a href=\"test.php?id=" . $row_id . "\">" . $row["Nachname"] . "</a></td>";
+                            echo " <td>"  . "<a href=\"account-details.php?id=" . $row_id . "\">" . $row_id . "</a></td>";
+                            echo " <td>"  . "<a href=\"account-details.php?id=" . $row_id . "\">" . $row["Vorname"] . "</a></td>";
+                            echo " <td>"  . "<a href=\"account-details.php?id=" . $row_id . "\">" . $row["Nachname"] . "</a></td>";
                             echo " <td>" . $row["Firma"] . "</td>";
                             echo " <td>" . $row["PLZ"] . "</td>";
                             echo " <td>" . $row["Land"] . "</td>";

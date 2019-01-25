@@ -18,39 +18,39 @@ echo $_GET['id'];
 </head>
 
 <body>
-    <div id="wrapper">
-        <div id="sidebar-wrapper" style="background-color:#37434d;">
-            <h1>CRM System</h1>
-            <div class="mt-5">
+<div id="wrapper">
+    <div id="sidebar-wrapper" style="background-color:#37434d;">
+        <h1 class="test"> <a id="amkID" href="index.php" >Sales</a></h1>
+        <div class="mt-5">
 
+            <!-- Sidebar Buttons-->
 
-                <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen"
-                                                    data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts</a>
-                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="accounts.php">Accounts suchen</a><a
-                                class="dropdown-item" role="presentation" href="accounts-anlegen.php">Accounts anlegen</a><a
-                                class="dropdown-item" role="presentation" href="ansprechpartner.php">Ansprechpartner</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
-                            type="button" style="width:248px;">Verkauf
-                    </button>
-                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="lead-anlegen.php">Leads</a><a
-                                class="dropdown-item" role="presentation" href="opportunitie.php">Opportunitys</a><a
-                                class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
-                            type="button" style="width:100%;">Grundfunktionen
-                    </button>
-                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="preise.php">Preise</a><a
-                                class="dropdown-item" role="presentation" href="produkte.php">Produkte</a><a
-                                class="dropdown-item" role="presentation" href="faktura.php">Faktura</a></div>
+            <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen"
+                                                data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts</a>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="accounts.php">Accounts suchen</a><a
+                            class="dropdown-item" role="presentation" href="accounts-anlegen.php">Accounts anlegen</a><a
+                            class="dropdown-item" role="presentation" href="ansprechpartner.php">Ansprechpartner</a>
                 </div>
             </div>
-            <div></div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
+                        type="button" style="width:248px;">Verkauf
+                </button>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="lead-anlegen.php">Leads</a><a
+                            class="dropdown-item" role="presentation" href="opportunitie.php">Opportunitys</a><a
+                            class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
+                        type="button" style="width:100%;">Grundfunktionen
+                </button>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="preise.php">Preise</a><a
+                            class="dropdown-item" role="presentation" href="produkte.php">Produkte</a><a
+                            class="dropdown-item" role="presentation" href="faktura.php">Faktura</a></div>
+            </div>
         </div>
-
+        <div></div>
+    </div>
 
 
         <div class="container-fluid">
@@ -64,7 +64,7 @@ echo $_GET['id'];
 
                     print "<div class=\"table-responsive\">\n";
                     print "                        <table class=\"table\">\n";
-                    print "                            <thead>\n";
+                    print "                           k <thead>\n";
                     print "                                <tr>\n";
                     print "                                    <th>Column 1</th>\n";
                     print "                                    <th>Column 2</th>\n";
