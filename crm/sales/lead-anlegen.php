@@ -73,16 +73,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Vordem Insert überprüfen ob Fehler vorhanden sind
     if(empty($vornameError) && empty($nachnameError) && empty($firmaError) && empty($plzError) && empty($landError) && empty($strasseError) && empty($stadtError)) {
 
-        //SQL Statement Variable übergeben
-        $sqlStatement = "INSERT INTO leads (Vorname, Nachname,Firma, PLZ, Land, Strasse, leadInteresse, Stadt, Hausnummer) 
+        $sqlPrüfen = "SELECT Vorname, Nachname, Firma  FROM leads
+                      WHERE (Vorname ='$vorname') AND (Nachname = '$nachname') AND (Firma = '$firma')";
+
+        $resultPrüfen = mysqli_query($connection, $sqlPrüfen);
+        if (mysqli_num_rows($resultPrüfen) >= 1) {
+            $datenbankError = "Lead bereits vorhanden";
+        } else {
+            //SQL Statement Variable übergeben
+            $sqlStatement = "INSERT INTO leads (Vorname, Nachname,Firma, PLZ, Land, Strasse, leadInteresse, Stadt, Hausnummer) 
                      VALUES ('$vorname','$nachname','$firma', '$plz', '$land', '$strasse', '$leadInteresse', '$stadt', '$hausNummer')";
 
-        //SQL Insert durchführen mit mysqli query
-        if(mysqli_query($connection, $sqlStatement)) {
-            echo "Account erfolgreich angelegt";
-        } else {
-            echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
+            //SQL Insert durchführen mit mysqli query
+            if(mysqli_query($connection, $sqlStatement)) {
+                echo "Account erfolgreich angelegt";
+            } else {
+                echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
+            }
+
         }
+
+
 
     }
 }
@@ -180,6 +191,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" name="land" value="<?php echo $land; ?>" class="ml-2">
                     <span class="help-block"><?php echo $landError; ?></span>
                     <button class="btn btn-primary such-button" type="submit">Account anlegen</button>
+                    <span class="help-block"><?php echo $datenbankError; ?></span>
                 </div>
                 </form>
             </div>

@@ -48,7 +48,7 @@ echo $primaryKey;
                 include("config.php");
                 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-                    $select = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, Hausnummer, Rolle FROM test WHERE ID = '$primaryKey'";
+                    $select = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, Hausnummer, Rolle FROM accounts WHERE ID = '$primaryKey'";
                     $result = mysqli_query($connection, $select);
 
                     print "<div class=\"table-responsive\">\n";
