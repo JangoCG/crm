@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 
 $primaryKey = $_GET['id'];
-echo $primaryKey;
+
 
 
 ?>
@@ -28,40 +28,9 @@ echo $primaryKey;
 
 <body>
 <div id="wrapper">
-    <div id="sidebar-wrapper" style="background-color:#37434d;">
-        <h1 class="test"><a id="amkID" href="index.php">Sales</a></h1>
-        <div class="mt-5">
-
-            <!-- Sidebar Buttons-->
-
-            <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen"
-                                                data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts</a>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
-                                                          href="accounts-suchen.php">Accounts suchen</a><a
-                            class="dropdown-item" role="presentation" href="accounts-anlegen.php">Accounts anlegen</a><a
-                            class="dropdown-item" role="presentation" href="ansprechpartner.php">Ansprechpartner</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
-                        type="button" style="width:248px;">Verkauf
-                </button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
-                                                          href="lead-anlegen.php">Leads</a><a
-                            class="dropdown-item" role="presentation" href="opportunies.php">Opportunitys</a><a
-                            class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
-                        type="button" style="width:100%;">Grundfunktionen
-                </button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="preise.php">Preise</a><a
-                            class="dropdown-item" role="presentation" href="produkte.php">Produkte</a><a
-                            class="dropdown-item" role="presentation" href="faktura.php">Faktura</a></div>
-            </div>
-        </div>
-        <div></div>
-    </div>
+    <?php
+    include "sidebar.html";
+    ?>
 
 
     <div class="container-fluid">
@@ -75,12 +44,13 @@ echo $primaryKey;
 
         <div class="row">
             <div class="col">
-                <strong>Account Details</strong>
+                <strong>Lead Details</strong>
                 <?php
                 include("config.php");
                 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-                    $select = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, Hausnummer, Rolle FROM test WHERE ID = '$primaryKey'";
+                    $select = "SELECT ID,Vorname,Nachname, Firma, Strasse, leadInteresse, Stadt, Stadt, hausNummer, PLZ, LAND
+                              FROM leads WHERE ID = '$primaryKey'";
                     $result = mysqli_query($connection, $select);
 
 
@@ -101,47 +71,54 @@ echo $primaryKey;
                     print "                            </thead>\n";
                     print "                            <tbody>\n";
                     if (mysqli_num_rows($result) > 0) {
+                        print '<form method="post" action ="lead-details.php">';
+
+
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<tr>';
                             echo " <td>" . $row['ID'] . "</td>";
+                            echo " <td>" . $row["leadInteresse"] . "</td>";
                             echo " <td>" . $row["Vorname"] . "</td>";
                             echo " <td>" . $row["Nachname"] . "</td>";
                             echo " <td>" . $row["Firma"] . "</td>";
-                            echo " <td>" . $row["PLZ"] . "</td>";
-                            echo " <td>" . $row["Land"] . "</td>";
                             echo " <td>" . $row["Strasse"] . "</td>";
-                            echo " <td>" . $row["Hausnummer"] . "</td>";
-                            echo " <td>" . $row["Rolle"] . "</td>";
+                            echo " <td>" . $row["hausNummer"] . "</td>";
+                            echo " <td>" . $row["Stadt"] . "</td>";
+                            echo " <td>" . $row["PLZ"] . "</td>";
+
                             echo '</tr>';
                         }
+                        print '</form>';
                     }
+
                 }
                 ?>
                 </table>
             </div>
-            </div>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div>
+            <h3>Lead umwandeln</h3>
+            <p> Sind Sie sicher, dass Sie den Lead in ein eine Opportunite umwandeln möchten?</p>
         </div>
 
-        <div class="row">
-            <div class="col">
-                <div>
-                    <h1>test</h1>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary such-button" type="submit">Account anlegen</button>
-                </div>
-            </div>
+        <div>
+            <button class="btn btn-primary such-button" type="submit">Umwandeln</button>
         </div>
+    </div>
+</div>
 
 </div>
 
 
 
-        <script src="../assets/js/jquery.min.js"></script>
-        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../assets/js/Sidebar-Menu.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/js/Sidebar-Menu.js"></script>
 
 
 </body>

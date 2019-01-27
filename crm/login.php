@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION["loggedin"] == true;
                 $_SESSION["id"] == id;
                 $_SESSION["username"] == $username;
-                header("location: Startseite.php");
+                header("location: startseite.php");
             } else{
                 $passwordError = "Passwort ist falsch. Bitte versuchen Sie es erneut";
             }
@@ -75,12 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </style>
 </head>
 
-<style>
-    body {
-        background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
 
-    }
-</style>
 <body>
 
 <div class="wrapper">
@@ -100,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Einloggen">
             </div>
-            <p> Noch keinen Bentzeraccount? Klicken Sie <a href="register.php">hier!</a></p>
+            <p> Noch keinen Bentzeraccount? Klicken Sie <a href="index.php">hier!</a></p>
         </form>
     </div>
 

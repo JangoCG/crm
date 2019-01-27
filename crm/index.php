@@ -116,10 +116,7 @@ echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
 </head>
 
 <style>
-    body {
-        background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
 
-    }
 </style>
 
 <body>
@@ -131,7 +128,7 @@ echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
     <div class="wrapper">
         <h2>Registrieren</h2>
         <p>Bitte erstelle eine Account</p>
-        <form action="register.php" method="post">
+        <form action="index.php" method="post">
             <div>
                 <label>Benutzername</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">

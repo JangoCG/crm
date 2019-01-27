@@ -164,7 +164,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($vornameError) && empty($nachnameError) && empty($firmaError) && empty($plzError) && empty($landError) && empty($strasseError) && empty($stadtError)) {
 
         //SQL Statement Variable übergeben
-        $sqlStatement = "INSERT INTO test (Vorname, Nachname,Firma, PLZ, Land, Strasse, leadInteresse, Stadt, Hausnummer) 
+        $sqlStatement = "INSERT INTO leads (Vorname, Nachname,Firma, PLZ, Land, Strasse, leadInteresse, Stadt, Hausnummer) 
                      VALUES ('$vorname','$nachname','$firma', '$plz', '$land', '$strasse', '$leadInteresse', '$stadt', '$hausNummer')";
 
         //SQL Insert durchführen mit mysqli query
@@ -196,24 +196,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 <div id="wrapper">
-    <div id="sidebar-wrapper" style="background-color:#37434d;">
-        <h1><a href="index.php">Sales</a></h1>
-        <div class="mt-5">
-
-            <!-- Sidebar Buttons-->
-
-            <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts</a>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="accounts.php">Accounts</a><a class="dropdown-item" role="presentation" href="accounts-anlegen.php">Accounts anlegen</a><a class="dropdown-item" role="presentation" href="ansprechpartner.php">Ansprechpartner</a></div>
-            </div>
-            <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:248px;">Verkauf</button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="lead-anlegen.php">Leads anlegen</a><a class="dropdown-item" role="presentation" href="opportunitie.php">Opportunitys</a><a class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
-            </div>
-            <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:100%;">Grundfunktionen</button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="preise.php">Preise</a><a class="dropdown-item" role="presentation" href="produkte.php">Produkte</a><a class="dropdown-item" role="presentation" href="faktura.php">Faktura</a></div>
-            </div>
-        </div>
-        <div></div>
-    </div>
+    <?php
+    include "sidebar.html";
+    ?>
 
     <!-- Container und danach kommt die Obere Navigation-->
 

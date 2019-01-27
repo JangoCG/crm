@@ -14,39 +14,9 @@
 
 <body>
 <div id="wrapper">
-    <div id="sidebar-wrapper" style="background-color:#37434d;">
-        <h1 class="test"> <a id="amkID" href="index.php" >Sales</a></h1>
-        <div class="mt-5">
-
-            <!-- Sidebar Buttons-->
-
-            <div class="dropdown amk-border"><a class="btn btn-primary dropdown-toggle kein-rahmen"
-                                                data-toggle="dropdown" aria-expanded="false" role="button" href="#">Accounts</a>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="accounts.php">Accounts suchen</a><a
-                            class="dropdown-item" role="presentation" href="accounts-anlegen.php">Accounts anlegen</a><a
-                            class="dropdown-item" role="presentation" href="ansprechpartner.php">Ansprechpartner</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
-                        type="button" style="width:248px;">Verkauf
-                </button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="lead-anlegen.php">Leads</a><a
-                            class="dropdown-item" role="presentation" href="opportunitie.php">Opportunitys</a><a
-                            class="dropdown-item" role="presentation" href="kundenauftrag.php">Kundenaufträge</a></div>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false"
-                        type="button" style="width:100%;">Grundfunktionen
-                </button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="preise.php">Preise</a><a
-                            class="dropdown-item" role="presentation" href="produkte.php">Produkte</a><a
-                            class="dropdown-item" role="presentation" href="faktura.php">Faktura</a></div>
-            </div>
-        </div>
-        <div></div>
-    </div>
-
+    <?php
+    include "sidebar.html";
+    ?>
     <!-- Container und danach kommt die Obere Navigation-->
 
 
@@ -60,16 +30,22 @@
         </div>
         <div class="row">
             <div class="col">
-                <form action="accounts.php" method="post">
-                    <h1>Accounts suchen</h1>
+                <form action="leads-suchen.php" method="post">
+                    <h1>Leads suche</h1>
                     <div>
                         <label style="width:80.6px;">Nachname</label>
                         <input type="text" placeholder="Name eingeben" name="nachname" class="ml-2"
                                style="background-color:#ffffff;">
                     </div>
-                    <div><label style="width:80.6px;">Stadt</label><input type="text" name="stadt"
-                                                                          placeholder="Stadt eingeben"
-                                                                          class="ml-2"></div>
+                    <div>
+                        <label style="width:109.6px;">Bewertung</label>
+                        <select id="leadInteresse" name="leadInteresse[]"   class="ml-2" >
+                            <option>Hohes Interesse</option>
+                            <option>Mittleres Interesse</option>
+                            <option>Geringes Interesse</option>
+                        </select>
+                        <span class="help-block"><?php echo $leadInteresseError; ?></span>
+                    </div>
                     <div><label style="width:80.6px;">ID</label><input type="text" name="id" placeholder="ID eingeben"
                                                                        class="ml-2">
                         <button class="btn btn-primary such-button" type="submit">Suchen</button>
@@ -90,20 +66,25 @@
                 //Variablen deklarieren und mit leeren Werten initalisieren
 
                 $nachname = "";
-                $stadt = "";
+                $interesse = "";
                 $id = "";
 
                 $nachname = trim($_POST["nachname"]);
-                $stadt = trim($_POST["stadt"]);
-                $id = trim($_POST["id"]);
+
+                foreach ($_POST['leadInteresse'] as $interesse) {
+
+                }
+
+                echo $interesse;
+
 
 
 
                 //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, Hausnummer, Rolle FROM test
-                                        WHERE (Nachname ='$nachname' AND Nachname != '')  OR (Stadt = '$stadt'AND Stadt != '')
+                    $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, hausNummer, leadInteresse FROM leads
+                                        WHERE (Nachname ='$nachname' AND Nachname != '')  OR (leadInteresse = '$interesse'AND leadInteresse != '')
                                          OR (ID = '$id' AND ID != '')";
                     $result = mysqli_query($connection, $selectStatement);
 
@@ -129,9 +110,9 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             $row_id = $row['ID'];
                             echo '<tr>';
-                            echo " <td>"  . "<a href=\"account-details.php?id=" . $row_id . "\">" . $row_id . "</a></td>";
-                            echo " <td>"  . "<a href=\"account-details.php?id=" . $row_id . "\">" . $row["Vorname"] . "</a></td>";
-                            echo " <td>"  . "<a href=\"account-details.php?id=" . $row_id . "\">" . $row["Nachname"] . "</a></td>";
+                            echo " <td>"  . "<a href=\"lead-details.php?id=" . $row_id . "\">" . $row_id . "</a></td>";
+                            echo " <td>"  . "<a href=\"lead-details.php?id=" . $row_id . "\">" . $row["Vorname"] . "</a></td>";
+                            echo " <td>"  . "<a href=\"lead-details.php?id=" . $row_id . "\">" . $row["Nachname"] . "</a></td>";
                             echo " <td>" . $row["Firma"] . "</td>";
                             echo " <td>" . $row["PLZ"] . "</td>";
                             echo " <td>" . $row["Land"] . "</td>";

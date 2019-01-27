@@ -55,7 +55,7 @@ body {
 .sidebar-nav li a {
   display:block;
   text-decoration:none;
-  color:#999999;
+  color:#f5f5f5;
 }
 
 .sidebar-nav li a:hover {
@@ -75,7 +75,7 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand a {
-  color:#999999;
+  color:#f5f5f5;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
