@@ -16,18 +16,12 @@
 <div id="wrapper">
     <?php
     include "sidebar.html";
+    include "navigation-bar.html";
     ?>
-    <!-- Container und danach kommt die Obere Navigation-->
 
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col text-right" style="background-color:#37434d;"><input type="search"
-                                                                                 placeholder="Suchbegriff eingeben"
-                                                                                 id="grossesFeld">
-                <button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button>
-            </div>
-        </div>
+
+
         <div class="row">
             <div class="col">
                 <form action="leads-suchen.php" method="post">
@@ -40,9 +34,11 @@
                     <div>
                         <label style="width:109.6px;">Bewertung</label>
                         <select id="leadInteresse" name="leadInteresse[]"   class="ml-2" >
+                            <option></option>
                             <option>Hohes Interesse</option>
                             <option>Mittleres Interesse</option>
                             <option>Geringes Interesse</option>
+
                         </select>
                         <span class="help-block"><?php echo $leadInteresseError; ?></span>
                     </div>
@@ -65,11 +61,13 @@
 
                 //Variablen deklarieren und mit leeren Werten initalisieren
 
-                $nachname = "";
-                $interesse = "";
-                $id = "";
+
+
+
+
 
                 $nachname = trim($_POST["nachname"]);
+                $id = trim($_POST["id"]);
 
                 foreach ($_POST['leadInteresse'] as $interesse) {
 
@@ -84,7 +82,7 @@
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, hausNummer, leadInteresse FROM leads
-                                        WHERE (Nachname ='$nachname' AND Nachname != '')  OR (leadInteresse = '$interesse'AND leadInteresse != '')
+                                        WHERE (Nachname ='$nachname' AND Nachname != '')  OR (leadInteresse = '$interesse')
                                          OR (ID = '$id' AND ID != '')";
                     $result = mysqli_query($connection, $selectStatement);
 
@@ -102,7 +100,6 @@
                     echo '<th>Land</th>';
                     echo '<th>Strasse</th>';
                     echo '<th>Hausnummer</th>';
-                    echo '<th>Rolle</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo ' <tbody>';
@@ -117,8 +114,7 @@
                             echo " <td>" . $row["PLZ"] . "</td>";
                             echo " <td>" . $row["Land"] . "</td>";
                             echo " <td>" . $row["Strasse"] . "</td>";
-                            echo " <td>" . $row["Hausnummer"] . "</td>";
-                            echo " <td>" . $row["Rolle"] . "</td>";
+                            echo " <td>" . $row["hausNummer"] . "</td>";
                             echo '</tr>';
                         }
 

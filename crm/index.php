@@ -89,6 +89,7 @@ VALUES ('$username', '$hash')";
 
 if(mysqli_query($connection, $sqlStatement)) {
 echo "Registrierung erfolgreich";
+header("Location: /crm/startseite.php");
 } else {
 echo "Error:" .$sqlStatement . "<br>" . mysqli_error($connection);
 }

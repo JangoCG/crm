@@ -6,9 +6,7 @@ error_reporting(E_ALL);
 
 
 $primaryKey = $_GET['id'];
-
-
-
+$row;
 ?>
 
 
@@ -30,16 +28,13 @@ $primaryKey = $_GET['id'];
 <div id="wrapper">
     <?php
     include "sidebar.html";
+    include "navigation-bar.html";
     ?>
 
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col text-right" style="background-color:#37434d;"><input type="search"
-                                                                                 placeholder="Suchbegriff eingeben"
-                                                                                 id="grossesFeld">
-                <button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button>
-            </div>
+
         </div>
 
         <div class="row">
@@ -47,49 +42,53 @@ $primaryKey = $_GET['id'];
                 <strong>Lead Details</strong>
                 <?php
                 include("config.php");
-                if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                //if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-                    $select = "SELECT ID,Vorname,Nachname, Firma, Strasse, leadInteresse, Stadt, Stadt, hausNummer, PLZ, LAND
+                $select = "SELECT ID,Vorname,Nachname, Firma, Strasse, leadInteresse, Stadt, Stadt, hausNummer, PLZ, Land
                               FROM leads WHERE ID = '$primaryKey'";
-                    $result = mysqli_query($connection, $select);
+                $result = mysqli_query($connection, $select);
 
 
-                    print "<div class=\"table-responsive\">\n";
-                    print "                        <table class=\"table\">\n";
-                    print "                            <thead>\n";
-                    print "                                <tr>\n";
-                    print "                                    <th>Column 1</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                </tr>\n";
-                    print "                            </thead>\n";
-                    print "                            <tbody>\n";
-                    if (mysqli_num_rows($result) > 0) {
-                        print '<form method="post" action ="lead-details.php">';
+                print "<div class=\"table-responsive\">\n";
+                print "                        <table class=\"table\">\n";
+                print "                            <thead>\n";
+                print "                                <tr>\n";
+                echo '<th>ID</th>';
+                echo '<th>Interesse</th>';
+                echo ' <th>Vorname</th>';
+                echo '<th>Nachname</th>';
+                echo '<th>Firma</th>';
+                echo '<th>Strasse</th>';
+                echo '<th>Hausnummer</th>';
+                echo '<th>Stadt</th>';
+                echo '<th>PLZ</th>';
+                echo '<th>Land</th>';
+                print "                                </tr>\n";
+                print "                            </thead>\n";
+                print "                            <tbody>\n";
+                if (mysqli_num_rows($result) > 0) {
+                    print '<form method="post" action ="lead-details.php">';
 
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<tr>';
-                            echo " <td>" . $row['ID'] . "</td>";
-                            echo " <td>" . $row["leadInteresse"] . "</td>";
-                            echo " <td>" . $row["Vorname"] . "</td>";
-                            echo " <td>" . $row["Nachname"] . "</td>";
-                            echo " <td>" . $row["Firma"] . "</td>";
-                            echo " <td>" . $row["Strasse"] . "</td>";
-                            echo " <td>" . $row["hausNummer"] . "</td>";
-                            echo " <td>" . $row["Stadt"] . "</td>";
-                            echo " <td>" . $row["PLZ"] . "</td>";
+                    global $row;
+                    $row = mysqli_fetch_assoc($result);
 
-                            echo '</tr>';
-                        }
-                        print '</form>';
-                    }
+                    echo '<tr>';
+                    echo " <td>" . $row['ID'] . "</td>";
+                    echo " <td>" . $row["leadInteresse"] . "</td>";
+                    echo " <td>" . $row["Vorname"] . "</td>";
+                    echo " <td>" . $row["Nachname"] . "</td>";
+                    echo " <td>" . $row["Firma"] . "</td>";
+                    echo " <td>" . $row["Strasse"] . "</td>";
+                    echo " <td>" . $row["hausNummer"] . "</td>";
+                    echo " <td>" . $row["PLZ"] . "</td>";
+                    echo " <td>" . $row["Stadt"] . "</td>";
+                    echo " <td>" . $row["Land"] . "</td>";
+
+                    echo '</tr>';
+
+                    print '</form>';
+                    // }
 
                 }
                 ?>
@@ -107,13 +106,53 @@ $primaryKey = $_GET['id'];
         </div>
 
         <div>
-            <button class="btn btn-primary such-button" type="submit">Umwandeln</button>
+
+
+            <form method="POST" action='lead-details.php?id=<?= $primaryKey ?>'>
+
+                <input type="text" name="text" style="display:none">
+                <input type="submit" class="btn btn-primary such-button" name="button1" value="Umwandeln">
+            </form>
         </div>
     </div>
 </div>
 
+<div class="row">
+    <div class="col">
+        <?php
+        if (isset($_POST['text'])) {
+            global $row;
+            $vorname = $row['Vorname'];
+            $nachname = $row['Nachname'];
+            $id = $row['ID'];
+            $interesse = $row['leadInteresse'];
+            $firma = $row['Firma'];
+            $strasse = $row['Strasse'];
+            $hausnummer = $row['hausNummer'];
+            $stadt = $row['Stadt'];
+            $PLZ = $row['PLZ'];
+            $land = $row['Land'];
+
+
+
+            $sqlInsert = "INSERT INTO opportunities (Vorname, Nachname, Firma, Interesse, Stadt, Hausnummer, PLZ, Land, Strasse)
+            VALUES ('$vorname', '$nachname', '$firma', '$interesse', '$stadt', '$hausnummer', '$PLZ', '$land', '$strasse')";
+            mysqli_query($connection, $sqlInsert);
+
+            $delete = "DELETE FROM leads WHERE ID='$id'";
+            mysqli_query($connection, $delete);
+
+            echo "Lead wurde umgewandelt";
+        }
+
+
+        ?>
+
+
+    </div>
 </div>
 
+</div>
 
 
 <script src="../assets/js/jquery.min.js"></script>

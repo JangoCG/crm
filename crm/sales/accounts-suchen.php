@@ -16,20 +16,14 @@
 <div id="wrapper">
 
     <?php
-    include "sidebar.html"
+    include "sidebar.html";
+    include "navigation-bar.html";
     ?>
 
-    <!-- Container und danach kommt die Obere Navigation-->
 
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col text-right" style="background-color:#37434d;"><input type="search"
-                                                                                 placeholder="Suchbegriff eingeben"
-                                                                                 id="grossesFeld">
-                <button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button>
-            </div>
-        </div>
+
+
         <div class="row">
             <div class="col">
                 <form action="accounts-suchen.php" method="post">
