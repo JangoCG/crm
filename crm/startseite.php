@@ -38,11 +38,8 @@
             <div><form method="get" action="/crm/sales/index.php">
                     <button type="submit" style="width:140px" class="btn btn-info btn-lg bb">Salespro</button>
                 </form></div>
-            <div><form method="get" action="/crm/Service/index.php">
+            <div><form method="get" action="/crm/Service/servicepro.php">
                     <button type="submit" style="width:140px" class="btn btn-info btn-lg bb">Servicepro</button>
-                </form></div>
-            <div><form method="get" action="/crm/Lieferdienst">
-                    <button type="submit" style="width:140px" class="btn btn-info btn-lg bb">Lieferdienst</button>
                 </form></div>
         </div>
 
