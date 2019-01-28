@@ -4,9 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+//id wird variabvle primärschlüssel gegeben
 
 $primaryKey = $_GET['id'];
-echo $primaryKey;
+
 
 
 ?>
@@ -55,19 +56,22 @@ echo $primaryKey;
                     print "                        <table class=\"table\">\n";
                     print "                            <thead>\n";
                     print "                                <tr>\n";
-                    print "                                    <th>Column 1</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
-                    print "                                    <th>Column 2</th>\n";
+                    print "                                    <th>ID</th>\n";
+                    print "                                    <th>Vorname</th>\n";
+                    print "                                    <th>Nachname</th>\n";
+                    print "                                    <th>Firma</th>\n";
+                    print "                                    <th>PLZ</th>\n";
+                    print "                                    <th>Land</th>\n";
+                    print "                                    <th>Strasse</th>\n";
+                    print "                                    <th>Nummer</th>\n";
+                    print "                                    <th>Rolle</th>\n";
                     print "                                </tr>\n";
                     print "                            </thead>\n";
                     print "                            <tbody>\n";
+
+                    //mysql_num_rows schaut wieviel zeilen es hat
                     if (mysqli_num_rows($result) > 0) {
+                        //mysqli_fetch weißt es dann zu
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<tr>';
                             echo " <td>" . $row['ID'] . "</td>";
@@ -90,18 +94,7 @@ echo $primaryKey;
         </div>
         </div>
 
-        <div class="row">
-            <div class="col">
-                <div>
-                    <h1>test</h1>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary such-button" type="submit">Account anlegen</button>
-                </div>
-            </div>
-        </div>
-
+       
 </div>
 
         <script src="../assets/js/jquery.min.js"></script>

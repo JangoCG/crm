@@ -33,6 +33,7 @@
                     </div>
                     <div>
                         <label style="width:109.6px;">Bewertung</label>
+                        <!-- leadInteresse als Array deklariert, um es durchsuchen zu können -->
                         <select id="leadInteresse" name="leadInteresse[]"   class="ml-2" >
                             <option></option>
                             <option>Hohes Interesse</option>
@@ -49,25 +50,19 @@
                 </form>
 
 
+
+
                 <?php
-                /**
-                 * Created by PhpStorm.
-                 * User: cengiz
-                 * Date: 23.11.18
-                 * Time: 00:09
-                 */
+
 
                 include("config.php");
-
-                //Variablen deklarieren und mit leeren Werten initalisieren
-
-
-
 
 
 
                 $nachname = trim($_POST["nachname"]);
                 $id = trim($_POST["id"]);
+
+                //lead interesse als array deklariert, weil wir es hier mit for each schleife durchlaufen müssen
 
                 foreach ($_POST['leadInteresse'] as $interesse) {
 
@@ -80,6 +75,8 @@
 
                 //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
 
                     $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt, hausNummer, leadInteresse FROM leads
                                         WHERE (Nachname ='$nachname' AND Nachname != '')  OR (leadInteresse = '$interesse')
@@ -107,9 +104,11 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             $row_id = $row['ID'];
                             echo '<tr>';
+                            //Die links verlinken auf die lead-details seite und übergeben die ID
                             echo " <td>"  . "<a href=\"lead-details.php?id=" . $row_id . "\">" . $row_id . "</a></td>";
                             echo " <td>"  . "<a href=\"lead-details.php?id=" . $row_id . "\">" . $row["Vorname"] . "</a></td>";
                             echo " <td>"  . "<a href=\"lead-details.php?id=" . $row_id . "\">" . $row["Nachname"] . "</a></td>";
+
                             echo " <td>" . $row["Firma"] . "</td>";
                             echo " <td>" . $row["PLZ"] . "</td>";
                             echo " <td>" . $row["Land"] . "</td>";

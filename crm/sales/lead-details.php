@@ -1,8 +1,6 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 
 
 $primaryKey = $_GET['id'];
@@ -69,7 +67,7 @@ $row;
                 if (mysqli_num_rows($result) > 0) {
                     print '<form method="post" action ="lead-details.php">';
 
-
+                    //durch global nimmt er er es von oben
                     global $row;
                     $row = mysqli_fetch_assoc($result);
 
@@ -120,8 +118,11 @@ $row;
 <div class="row">
     <div class="col">
         <?php
+
         if (isset($_POST['text'])) {
             global $row;
+
+            //Ich speicher die Ausgaben der Tabelle in die Variable
             $vorname = $row['Vorname'];
             $nachname = $row['Nachname'];
             $id = $row['ID'];
@@ -133,7 +134,7 @@ $row;
             $PLZ = $row['PLZ'];
             $land = $row['Land'];
 
-
+            //Danach fügen wir es in eine andere Tabelle ein
 
             $sqlInsert = "INSERT INTO opportunities (Vorname, Nachname, Firma, Interesse, Stadt, Hausnummer, PLZ, Land, Strasse)
             VALUES ('$vorname', '$nachname', '$firma', '$interesse', '$stadt', '$hausnummer', '$PLZ', '$land', '$strasse')";
