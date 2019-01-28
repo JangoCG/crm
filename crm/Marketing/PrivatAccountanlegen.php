@@ -47,7 +47,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Abfrage für Nachname
     if (empty(trim($_POST["nachname"]))) {
         $nachnameError = "Bitte geben Sie einen nachnamen ein";
-
     } elseif (!(ctype_alpha($_POST["nachname"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
         $nachnameError = "Bitte verwenden Sie nur Buchstaben für den nachnamen";
     } elseif (strlen(trim($_POST["nachname"])) < 2) {
@@ -63,25 +62,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $firmaError = "Bitte geben Sie einen firman ein";
 
     } elseif (!(ctype_alpha($_POST["firma"]))) { //ctype_alpha prüft ob nur buchstaben vorhanden sind
-        $firmaError = "Bitte verwenden Sie nur Buchstaben für den firman";
+        $firmaError = "Bitte verwenden Sie nur Buchstaben für die FIrma";
     } elseif (strlen(trim($_POST["firma"])) < 2) {
-        $firmaError = "Der firma muss 2 Buchstaben oder mehr enthalten";
+        $firmaError = "Der Firma muss 2 Buchstaben oder mehr enthalten";
     } elseif (strlen(trim($_POST["firma"])) > 25) {
-        $firmaError = "Der firma muss 25 Buchstaben oder weniger enthalten";
+        $firmaError = "Der Firma muss 25 Buchstaben oder weniger enthalten";
     } else {
         $firma = trim($_POST["firma"]);
     }
 
     //Abfrage für PLZ
     if (empty(trim($_POST["plz"]))) {
-        $plzError = "Bitte geben Sie einen plzn ein";
-
+        $plzError = "Bitte geben Sie eine PLZ ein";
     } elseif (!(ctype_digit ($_POST["plz"]))) { //ctype_alpha prüft ob nur aus zahlen besteht
-        $plzError = "Bitte verwenden Sie nur Buchstaben für den plzn";
+        $plzError = "Bitte verwenden Sie nur Buchstaben für die PLZ";
     } elseif (strlen(trim($_POST["plz"])) < 5) {
-        $plzError = "Der plz muss 2 Buchstaben oder mehr enthalten";
+        $plzError = "Der PLZ muss 2 Buchstaben oder mehr enthalten";
     } elseif (strlen(trim($_POST["plz"])) > 5) {
-        $plzError = "Der plz muss 25 Buchstaben oder weniger enthalten";
+        $plzError = "Der PLZ muss 25 Buchstaben oder weniger enthalten";
     } else {
         $plz = trim($_POST["plz"]);
     }
@@ -179,7 +177,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.php">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.php">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
             </div>
             <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:248px;">Marketing</button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="#">Leads suchen</a><a class="dropdown-item" role="presentation" href="KampagneAnlegen.php">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="#">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan anlegen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan suchen</a><a class="dropdown-item" role="presentation" href="Dateisuche.php">Datei suchen</a></div>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="LeadAnlegen.php">Leads anlegen</a><a class="dropdown-item" role="presentation" href="LeadSuchen.php">Leads suchen</a><a class="dropdown-item" role="presentation" href="KampagneAnlegen.php">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="KampagneSuchen.php">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="Dateisuche.php">Datei suchen</a></div>
             </div>
         </div>
     </div>

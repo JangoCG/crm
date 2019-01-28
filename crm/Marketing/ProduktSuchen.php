@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accounts</title>
+    <title>Produkt Suchen</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
@@ -21,7 +21,7 @@
                 <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="ProduktAnlegen.php">Produkt anlegen</a><a class="dropdown-item" role="presentation" href="ProduktSuchen.php">Produkt suchen</a><a class="dropdown-item" role="presentation" href="PrivatAccountanlegen.php">Privat-Account anlegen</a><a class="dropdown-item" role="presentation" href="PrivatAccountsuchen.php">Privat-Account suchen</a></div>
             </div>
             <div class="dropdown"><button class="btn btn-primary dropdown-toggle kein-rahmen" data-toggle="dropdown" aria-expanded="false" type="button" style="width:248px;">Marketing</button>
-                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="#">Leads suchen</a><a class="dropdown-item" role="presentation" href="KampagneAnlegen.php">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="#">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan anlegen</a><a class="dropdown-item" role="presentation" href="#">Marketingplan suchen</a><a class="dropdown-item" role="presentation" href="Dateisuche.php">Datei suchen</a></div>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Leads anlegen</a><a class="dropdown-item" role="presentation" href="LeadSuchen.php">Leads suchen</a><a class="dropdown-item" role="presentation" href="KampagneAnlegen.php">Kampagne anlegen</a><a class="dropdown-item" role="presentation" href="KampagneSuchen.php">Kampagne suchen</a><a class="dropdown-item" role="presentation" href="Dateisuche.php">Datei suchen</a></div>
             </div>
         </div>
     </div>
@@ -38,12 +38,12 @@
                     <h1>Produkte suchen</h1>
                     <div>
                         <label style="width:80.6px;">Produkt-ID</label>
-                        <input type="text" placeholder="ID eingeben" name="nachname" class="ml-2"style="background-color:#ffffff;">
+                        <input type="text" placeholder="ID eingeben" name="produktid" class="ml-2"style="background-color:#ffffff;">
                     </div>
-                    <div><label style="width:80.6px;">Name</label><input type="text" name="stadt" placeholder="Produktname eingeben"class="ml-2"></div>
-                    <div><label style="width:80.6px;">Kategorie</label><input type="text" name="stadt" placeholder="Kategorie eingeben"class="ml-2"></div>
-                    <div><label style="width:80.6px;">Menge</label><input type="text" name="stadt" placeholder="Stadt eingeben"class="ml-2"></div>
-                    <div><label style="width:80.6px;">Preis</label><input type="text" name="id" placeholder="Preis eingeben"class="ml-2">
+                    <div><label style="width:80.6px;">Name</label><input type="text" name="name" placeholder="Produktname eingeben"class="ml-2"></div>
+                    <div><label style="width:80.6px;">Kategorie</label><input type="text" name="kategorie" placeholder="Kategorie eingeben"class="ml-2"></div>
+                    <div><label style="width:80.6px;">Menge</label><input type="text" name="menge" placeholder="Stadt eingeben"class="ml-2"></div>
+                    <div><label style="width:80.6px;">Preis</label><input type="text" name="preis" placeholder="Preis eingeben"class="ml-2">
                         <button class="btn btn-primary such-button" type="submit">Suchen</button>
                     </div>
                 </form>
@@ -62,21 +62,24 @@
 
                 //Variablen deklarieren und mit leeren Werten initalisieren
 
-                $nachname = "";
-                $stadt = "";
-                $id ="";
+                $produktid = "";
+                $name = "";
+                $kategorie = "";
+                $menge ="";
+                $preis ="";
 
-                $nachname = trim($_POST["nachname"]);
-                $stadt = trim($_POST["stadt"]);
-                $id = trim($_POST["id"]);
-
+                $produktid = trim($_POST["produktid"]);
+                $name = trim($_POST["name"]);
+                $kategorie = trim($_POST["kategorie"]);
+                $menge = trim($_POST["name"]);
+                $preis = trim($_POST["preis"]);
 
                 //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt FROM test
-                                        WHERE (Nachname ='$nachname' AND Nachname != '')  OR (Stadt = '$stadt'AND Stadt != '')
-                                         OR (ID = '$id' AND ID != '')";
+                    $selectStatement = "SELECT ProduktID, Name, Kategorie, Menge, Preis FROM Produktmarketing
+                                        WHERE (ProduktID ='$produktid' AND ProduktID != '')  OR (Name = '$name'AND Name != '')
+                                         OR (Kategorie = '$kategorie' AND Kategorie != '') OR (Menge = '$menge' AND Menge != '') OR (Preis = '$preis'AND Preis != '')";
                     $result = mysqli_query($connection, $selectStatement);
 
 
@@ -85,14 +88,11 @@
                 echo '   <table class="table">';
                     echo ' <thead>';
                     echo '<tr>';
-                        echo '<th>ID</th>';
-                        echo ' <th>Vorname</th>';
-                        echo '<th>Nachname</th>';
-                        echo '<th>Firma</th>';
-                        echo '<th>PLZ</th>';
-                        echo '<th>Land</th>';
-                        echo '<th>Strasse</th>';
-                        echo '<th>Stadt</th>';
+                        echo '<th>ProduktID</th>';
+                        echo '<th>Name</th>';
+                        echo '<th>Kategorie</th>';
+                        echo '<th>Menge</th>';
+                        echo '<th>Preis</th>';
                         echo '</tr>';
                     echo '</thead>';
                     echo ' <tbody>';
@@ -101,14 +101,11 @@
                     echo '<tr>';
 
                         // echo "</table>";
-                echo " <td>". $row["ID"]."</td>";
-                echo " <td>". $row["Vorname"]."</td>";
-                echo " <td>". $row["Nachname"]."</td>";
-                echo " <td>". $row["Firma"]."</td>";
-                echo " <td>". $row["PLZ"]."</td>";
-                echo " <td>". $row["Land"]."</td>";
-                echo " <td>". $row["Strasse"]."</td>";
-                echo " <td>". $row["Stadt"]."</td>";
+                echo " <td>". $row["ProduktID"]."</td>";
+                echo " <td>". $row["Name"]."</td>";
+                echo " <td>". $row["Kategorie"]."</td>";
+                echo " <td>". $row["Menge"]."</td>";
+                echo " <td>". $row["Preis"]."</td>";
                 echo '</tr>';
 
 

@@ -41,17 +41,37 @@
         </div>
         <div class="row">
             <div class="col">
-                <form action="PrivatAccountsuchen.php" method="post">
-                    <h1>Accounts suchen</h1>
+                <form action="LeadSuchen.php" method="post">
+                    <h1>Leads suchen</h1>
                     <div>
-                        <label style="width:80.6px;">Nachname</label>
-                        <input type="text" placeholder="Name eingeben" name="nachname" class="ml-2"
+                        <label style="width:80.6px;">ID</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" placeholder="ID eingeben" name="id" class="ml-2"
                                style="background-color:#ffffff;">
                     </div>
-                    <div><label style="width:80.6px;">Stadt</label><input type="text" name="stadt" placeholder="Stadt eingeben"
+                    <div><label style="width:80.6px;">Beschreibung</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="beschreibung" placeholder="Beschreibung eingeben"
                                                                           class="ml-2"></div>
-                    <div><label style="width:80.6px;">ID</label><input type="text" name="id" placeholder="ID eingeben"
+                    <div><label style="width:80.6px;">Interessent</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="interessent" placeholder="Interessent eingeben"
                                                                        class="ml-2">
+                    </div>
+                    <div>
+                        <label style="width:80.6px;">Kampagne</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" placeholder="Kampagne eingeben" name="kampagne" class="ml-2"
+                               style="background-color:#ffffff;">
+                    </div>
+                    <div>
+                        <label style="width:80.6px;">Partnernummer</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" placeholder="Partnernummer eingeben" name="partnernummer" class="ml-2"
+                               style="background-color:#ffffff;">
+                    </div>
+                    <div>
+                        <label style="width:80.6px;">Starttermin</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" placeholder="Starttermin eingeben" name="starttermin" class="ml-2"
+                               style="background-color:#ffffff;">
+                    </div>
+                    <div>
+                        <label style="width:80.6px;">Endtermin</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" placeholder="Endtermin eingeben" name="endtermin" class="ml-2"
+                               style="background-color:#ffffff;">
                         <button class="btn btn-primary such-button" type="submit">Suchen</button>
                     </div>
                 </form>
@@ -70,21 +90,30 @@
 
                 //Variablen deklarieren und mit leeren Werten initalisieren
 
-                $nachname = "";
-                $stadt = "";
-                $id ="";
+                $id = "";
+                $beschreibung = "";
+                $interessent = "";
+                $kampagne = "";
+                $partnernummer = "";
+                $starttermin = "";
+                $endtermin = "";
 
-                $nachname = trim($_POST["nachname"]);
-                $stadt = trim($_POST["stadt"]);
                 $id = trim($_POST["id"]);
-
+                $beschreibung = trim($_POST["beschreibung"]);
+                $interessent = trim($_POST["interessent"]);
+                $kampagne = trim($_POST["kampagne"]);
+                $partnernummer = trim($_POST["partnernummer"]);
+                $starttermin = trim($_POST["starttermin"]);
+                $endtermin = trim($_POST["endtermin"]);
 
                 //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $selectStatement = "SELECT ID,Vorname,Nachname, Firma, PLZ, Land, Strasse, Stadt FROM test
-                                        WHERE (Nachname ='$nachname' AND Nachname != '')  OR (Stadt = '$stadt'AND Stadt != '')
-                                         OR (ID = '$id' AND ID != '')";
+                    $selectStatement = "SELECT ID, Beschreibung, Interessent, Kampagne, Partnernummer, Starttermin, Endtermin FROM Lead
+                                        WHERE (ID ='$id' AND ID != '')  OR (Beschreibung = '$beschreibung'AND Beschreibung != '')
+                                         OR (Interessent = '$interessent' AND Interessent != '') OR (Kampagne = '$kampagne' AND Kampagne != '')
+                                         OR (Partnernummer = '$partnernummer'AND Partnernummer != '') OR (Starttermin = '$starttermin'AND Starttermin != '')
+                                         OR (Endtermin = '$endtermin'AND Endtermin != '')";
                     $result = mysqli_query($connection, $selectStatement);
 
 
@@ -94,13 +123,12 @@
                     echo ' <thead>';
                     echo '<tr>';
                     echo '<th>ID</th>';
-                    echo ' <th>Vorname</th>';
-                    echo '<th>Nachname</th>';
-                    echo '<th>Firma</th>';
-                    echo '<th>PLZ</th>';
-                    echo '<th>Land</th>';
-                    echo '<th>Strasse</th>';
-                    echo '<th>Stadt</th>';
+                    echo '<th>Beschreibung</th>';
+                    echo '<th>Interessent</th>';
+                    echo '<th>Kampagne</th>';
+                    echo '<th>Partnernummer</th>';
+                    echo '<th>Starttermin</th>';
+                    echo '<th>Endtermin</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo ' <tbody>';
@@ -110,13 +138,12 @@
 
                             // echo "</table>";
                             echo " <td>". $row["ID"]."</td>";
-                            echo " <td>". $row["Vorname"]."</td>";
-                            echo " <td>". $row["Nachname"]."</td>";
-                            echo " <td>". $row["Firma"]."</td>";
-                            echo " <td>". $row["PLZ"]."</td>";
-                            echo " <td>". $row["Land"]."</td>";
-                            echo " <td>". $row["Strasse"]."</td>";
-                            echo " <td>". $row["Stadt"]."</td>";
+                            echo " <td>". $row["Beschreibung"]."</td>";
+                            echo " <td>". $row["Interessent"]."</td>";
+                            echo " <td>". $row["Kampagne"]."</td>";
+                            echo " <td>". $row["Partnernummer"]."</td>";
+                            echo " <td>". $row["Starttermin"]."</td>";
+                            echo " <td>". $row["endtermin"]."</td>";
                             echo '</tr>';
 
 
