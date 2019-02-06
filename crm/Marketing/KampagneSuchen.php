@@ -28,17 +28,14 @@
 
 
 
-    <!-- Container und danach kommt die Obere Navigation-->
-
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col text-right" style="background-color:#37434d;"><input type="search"
-                                                                                 placeholder="Suchbegriff eingeben"
-                                                                                 id="grossesFeld">
-                <button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button>
+            <div class="col text-right" style="background-color:#37434d;">
+                <a class="btn  btn-primary ml-2 mt-1 mb-1" type="Suche" href="http://3.120.69.90/crm/startseite.php">Logout</a>
             </div>
         </div>
+    </div>
         <div class="row">
             <div class="col">
                 <form action="KampagneSuchen.php" method="post">
@@ -117,7 +114,7 @@
                 //Diese IF Abfrage weil ich sonst Fehler bekommen, da beim ersten Aufruf noch kein post geschehen ist
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $selectStatement = "SELECT Beschreibung, Art, Zielsetzung, Taktik, Prioritaet, Mitarbeiter, Starttermin, Endtermin FROM kampagne
+                    $selectStatement = "SELECT Beschreibung, Art, Zielsetzung, Taktik, Prioritaet, Mitarbeiter, Starttermin, Endtermin FROM KampagneMarketing
                                         WHERE (Beschreibung ='$beschreibung' AND Beschreibung != '')  OR (Art = '$art'AND Art != '')
                                          OR (Zielsetzung = '$zielsetzung' AND Zielsetzung != '') OR (Taktik = '$taktik' AND Taktik != '')
                                          OR (Prioritaet = '$prioritaet'AND Prioritaet != '') OR (Mitarbeiter = '$mitarbeiter'AND Mitarbeiter != '')

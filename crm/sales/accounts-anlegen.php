@@ -143,7 +143,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($vornameError) && empty($nachnameError) && empty($firmaError) && empty($plzError) && empty($landError) && empty($strasseError) && empty($stadtError)) {
 
         //SQL Statement Variable übergeben
-        $sqlStatement = "INSERT INTO test (Vorname, Nachname,Firma, PLZ, Land, Strasse, Rolle, Stadt) 
+        $sqlStatement = "INSERT INTO AccountCRM (Vorname, Nachname,Firma, PLZ, Land, Strasse, Rolle, Stadt) 
                      VALUES ('$vorname','$nachname','$firma', '$plz', '$land', '$strasse', '$rolle', '$stadt')";
 
         //SQL Insert durchführen mit mysqli query

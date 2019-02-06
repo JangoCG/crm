@@ -104,7 +104,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($produktidError) && empty($nameError) && empty($kategorieError) && empty($mengeError) && empty($preisError)) {
 
         //SQL Statement Variable übergeben
-        $sqlStatement = "INSERT INTO Produktmarketing (ProduktID, Name, Kategorie, Menge, Preis) 
+        $sqlStatement = "INSERT INTO ProduktMarketing (ProduktID, Name, Kategorie, Menge, Preis) 
                      VALUES ('$produktid', '$name', '$kategorie', '$menge', '$preis')";
 
         //SQL Insert durchführen mit mysqli query
@@ -151,8 +151,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col text-right" style="background-color:#37434d;"><input type="search" placeholder="Suchbegriff eingeben" id="grossesFeld"><button class="btn btn-primary ml-2 mt-1 mb-1" type="button">Button</button></div>
+            <div class="col text-right" style="background-color:#37434d;">
+                <a class="btn  btn-primary ml-2 mt-1 mb-1" type="Suche" href="http://3.120.69.90/crm/startseite.php">Logout</a>
+            </div>
         </div>
+
 
         <div class="row">
             <div class="col">
