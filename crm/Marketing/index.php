@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 
+<!--Das hier in deine ganzen Dateien kopieren -->
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +21,8 @@
     include "sidebar.html";
     include "navigation-bar.html"
     ?>
+
+    <!--Bis hier hin -->
 
 
     <div class="row">
