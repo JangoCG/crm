@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 
-<!--Das hier in deine ganzen Dateien kopieren -->
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account anlegen</title>
+    <title>Startseite</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="../assets/css/Sidebar-Menu.css">
@@ -21,8 +19,6 @@
     include "sidebar.html";
     include "navigation-bar.html"
     ?>
-
-    <!--Bis hier hin -->
 
 
     <div class="row">
@@ -70,8 +66,8 @@
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/js/Sidebar-Menu.js"></script>
-</body>
 
+</body>
 </html>
 
 <?php
