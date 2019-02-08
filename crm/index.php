@@ -54,7 +54,7 @@ if(empty(trim($_POST["password"]))) {
 } elseif (strlen(trim($_POST["password"])) > 30) {
     $passwordError = "Passwort darf nicht mehr als 30 Zeichen haben";
 
-}  elseif(!(ctype_alnum(trim($_POST["password"])))) {  //ctype_alum checkt ob das password nur aus alphanumerischen zeichen besteht
+}  elseif(!(ctype_alnum(trim($_POST["password"])))) {
     $passwordError = "Passwort darf nur aus Buchstaben und Zahlen bestehen";
 
 } else {

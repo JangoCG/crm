@@ -19,11 +19,6 @@
     include "sidebar.html";
     include "navigation-bar.html";
     ?>
-
-
-
-
-
         <div class="row">
             <div class="col">
                 <form action="accounts-suchen.php" method="post">

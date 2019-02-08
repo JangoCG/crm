@@ -20,10 +20,6 @@
             text-align: center;
             min-height: 100vh;
         }
-
-
-
-
     </style>
 </head>
 <body>
